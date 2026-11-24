@@ -11,14 +11,14 @@
 <meta property="og:image" content="share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#f4ede0">
+<meta name="theme-color" content="#110e0b">
 <!-- <link rel="canonical" href="https://[dominio del cliente]/"> -->
 <meta name="site-kind" content="other">
 <meta name="page-type" content="place">
 <meta name="page-kind" content="place">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..600&family=Figtree:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Marcellus+SC&family=Figtree:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/system.css">
 <link rel="stylesheet" href="assets/ui/cards.css">
 <link rel="stylesheet" href="assets/motion/motion.css">
@@ -27,14 +27,16 @@
 <link rel="stylesheet" href="assets/icons/icon.css">
 <style>
 :root {
-  --p-bg: #f4ede0; --p-surface: #e9dfcc; --p-ink: #10283a; --p-muted: #53626c;
-  --p-accent: #c8471f; --p-accent-ink: #ffffff; --p-action: #c8471f; --p-action-ink: #ffffff;
-  --p-inv-bg: #10283a; --p-inv-surface: #1e3445; --p-inv-ink: #f4ede0; --p-inv-muted: #969c9e;
-  --p-inv-accent: #c8471f; --p-inv-accent-ink: #ffffff; --p-inv-action: #c8471f; --p-inv-action-ink: #ffffff;
-  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  /* la paleta del logo: negro, dorado de la cerveza y crema de la espuma */
+  --p-bg: #110e0b; --p-surface: #1d1813; --p-ink: #f3ead8; --p-muted: #b9ab93;
+  --p-accent: #dca64b; --p-accent-ink: #15100a; --p-action: #dca64b; --p-action-ink: #15100a;
+  --p-inv-bg: #dca64b; --p-inv-surface: #cf983c; --p-inv-ink: #15100a; --p-inv-muted: #4b3613;
+  --p-inv-accent: #5a1a08; --p-inv-accent-ink: #f3ead8; --p-inv-action: #15100a; --p-inv-action-ink: #f3ead8;
+  --font-display: "Lobster", "Brush Script MT", cursive;
   --font-text: "Figtree", system-ui, sans-serif;
+  --font-caps: "Marcellus SC", Georgia, serif;
   --display-weight: 400;
-  --display-tracking: -0.03em;
+  --display-tracking: 0em;
 }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
@@ -47,10 +49,20 @@
 <!-- page CSS -->
 <style>
   /* la marca provisional: el sol (la "bola") cayendo sobre dos olas del Pacífico; se cambia por el logo del cliente */
-  .brand-mark { display: inline-block; width: 28px; height: 28px; flex: none; margin-right: 10px; vertical-align: middle; }
-  .brand-mark .sun { fill: var(--p-accent); }
-  .brand-mark .sea { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
-  .nav__logo { display: inline-flex; align-items: center; }
+  /* la marca: los dos tarros del logo y "La Bolera" en script dorado */
+  .brand-mark { display: inline-flex; flex: none; margin-right: 10px; color: var(--p-accent); --foam: var(--p-ink); }
+  .brand-mark svg { width: 20px; height: 26px; }
+  .brand-mark svg + svg { margin-left: -5px; transform: scaleX(-1); }
+  .nav__logo { display: inline-flex; align-items: center; font-family: var(--font-display); font-size: 26px; color: var(--p-accent); letter-spacing: 0; }
+  .ic { width: 1em; height: 1em; flex: none; }
+  .caps { font-family: var(--font-caps); letter-spacing: .14em; }
+  h1, h2:not(.t-label) { letter-spacing: 0; }
+  .hero h1 { color: var(--p-ink); }
+  .hero h1 .gold, h2 .gold { color: var(--p-accent); }
+  .orn { display: flex; align-items: center; gap: 10px; color: var(--p-accent); font-family: var(--font-caps); font-size: 15px; letter-spacing: .18em; margin: 0 0 var(--s-3); }
+  .orn::before, .orn::after { content: ""; height: 1px; width: 32px; background: currentColor; opacity: .7; }
+  .orn .ic { font-size: 12px; }
+  .footer__lede { font-family: var(--font-text); }
   .lang-toggle { min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--r-btn); background: none; color: var(--ink); font: 500 14px/1 var(--font-text); cursor: pointer; }
   .lang-toggle:hover { background: color-mix(in oklab, var(--bg) 92%, var(--ink)); }
   .order-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; margin-left: 8px; padding: 0 6px; border-radius: 11px; background: var(--p-action-ink); color: var(--p-action); font: 600 12px/1 var(--font-text); }
@@ -74,7 +86,9 @@
   .add-icon:hover { background: color-mix(in oklab, var(--bg) 88%, var(--p-accent)); }
   .add-icon svg { width: 18px; height: 18px; }
   .add-icon.is-added, .add-btn.is-added { color: var(--p-ink); }
-  #carta .t-label { color: var(--ink); margin-bottom: 12px; }
+  #carta .t-label { display: flex; align-items: center; gap: 10px; color: var(--p-accent); margin-bottom: 12px; font-family: var(--font-caps); font-size: 16px; letter-spacing: .12em; }
+  #carta .t-label .ic { font-size: 26px; --bg: var(--p-surface); --foam: var(--p-ink); }
+  #menu .dish .tile__price, .rows--menu .rows__value { color: var(--p-accent); }
   .group-photo { margin: 0 0 var(--s-5); overflow: hidden; aspect-ratio: 16 / 9; }
   .group-photo > img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease); }
   .hours dd { white-space: nowrap; }
@@ -89,16 +103,17 @@
 
   /* frase de los clientes */
   .statement .mo-wh__text { font: var(--display-weight) clamp(30px, 4.4vw, 60px)/1.12 var(--font-display); letter-spacing: -0.025em; max-width: 22ch; margin-top: var(--s-5); }
-  .statement .t-label { color: var(--muted); }
+  .statement .t-label { color: var(--muted); font-family: var(--font-caps); font-size: 15px; letter-spacing: .14em; }
   .statement.is-done .mo-wh__text strong { color: var(--p-accent); }
-  /* el sol de la marca se pone detrás del mar mientras la sección pasa (parallax de un gráfico, no del texto) */
-  .sunset { align-self: stretch; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 420px; }
-  .sunset__sky { position: relative; overflow: hidden; border-bottom: 2px solid var(--p-accent); }
-  .sunset__sun { position: absolute; left: 50%; bottom: 0; width: min(78%, 340px); aspect-ratio: 1; border-radius: 50%; background: var(--p-accent);
-    transform: translate3d(-50%, calc(35% + var(--sun, 0%)), 0); will-change: transform; }
-  .sunset__sea { display: block; width: 100%; height: 60px; margin-top: 18px; color: var(--p-inv-muted); }
-  @media (prefers-reduced-motion: reduce) { .sunset__sun { transform: translate3d(-50%, 35%, 0); } }
-  @media (max-width: 1023px) { .sunset { min-height: 220px; margin-top: var(--s-6); } .sunset__sun { width: min(46%, 220px); } }
+  /* el emblema del logo: el aro dorado gira y los tarros flotan mientras pasa la sección (parallax del gráfico, nunca del texto) */
+  .emblem-wrap { align-self: center; display: grid; place-items: center; }
+  .emblem { width: min(100%, 440px); height: auto; color: var(--ink); overflow: visible; --foam: #f3ead8; --bg: var(--p-inv-bg); }
+  .emblem .ring { transform-origin: 160px 165px; transform: rotate(calc(var(--t, .5) * 50deg - 25deg)); will-change: transform; }
+  .emblem .float { transform: translate3d(0, calc(var(--t, .5) * 28px - 14px), 0); will-change: transform; }
+  .emblem .float-b { transform: translate3d(0, calc(var(--t, .5) * -22px + 11px), 0); will-change: transform; }
+  .emblem text { fill: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { .emblem .ring, .emblem .float, .emblem .float-b { transform: none; } }
+  @media (max-width: 1023px) { .emblem-wrap { margin-top: var(--s-6); } .emblem { width: min(70%, 300px); } }
 
   /* pedido */
   .order { background: var(--g-alt, var(--p-surface)); padding: 48px; display: grid; gap: var(--s-5); align-content: start; }
@@ -113,11 +128,11 @@
   .order__fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
   .order .field input, .order .field select { width: 100%; height: 48px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: var(--r-btn); background: var(--bg); color: var(--ink); font: 400 16px/1 var(--font-text); }
   .order .field label { display: block; margin-bottom: 6px; font-size: 14px; }
-  .order .field__error { color: #a3341a; font-size: 14px; margin: 6px 0 0; }
-  .order__error { color: #a3341a; margin: 0; }
+  .order .field__error { color: #ff9b7a; font-size: 14px; margin: 6px 0 0; }
+  .order__error { color: #ff9b7a; margin: 0; }
   
-  .close__word .o-sun { display: inline-block; width: .72em; height: .72em; vertical-align: -0.02em; margin: 0 .01em; }
-  .close__word .o-sun circle { fill: var(--p-accent); }
+  .close__word { color: var(--p-accent); letter-spacing: 0 !important; line-height: 1.05 !important; }
+  .close__word .caps { display: block; font-size: max(14px, .12em); color: var(--p-ink); letter-spacing: .5em; margin-top: .55em; }
 
   @media (max-width: 1023px) {
     .order { padding: 32px; }
@@ -132,18 +147,25 @@
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mug" viewBox="0 0 24 30"><path fill="currentColor" d="M4 12h12v12.5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path fill="none" stroke="currentColor" stroke-width="2.2" d="M16 14.5h2.4a2.6 2.6 0 0 1 2.6 2.6v3.3a2.6 2.6 0 0 1-2.6 2.6H16"/><path fill="var(--foam, #f3ead8)" d="M3 12.6a2.8 2.8 0 0 1 2.3-4.3 3.6 3.6 0 0 1 6.4-1.6 3.1 3.1 0 0 1 5.6 1.4 2.3 2.3 0 0 1 .3 4.5z"/><path d="M7.5 15.5v8M10 15.5v8M12.5 15.5v8" stroke="var(--bg, #110e0b)" stroke-opacity=".35" stroke-width="1"/></symbol>
+  <symbol id="i-fish" viewBox="0 0 24 24"><path fill="currentColor" d="M2 12c2.7-4.4 8-5.8 12.4-3.3L19.5 5v14l-5.1-3.7C10 17.8 4.7 16.4 2 12z"/><circle cx="6.6" cy="11" r="1.1" fill="var(--bg, #110e0b)"/><path d="M10.5 9.5c.8 1.6.8 3.4 0 5" fill="none" stroke="var(--bg, #110e0b)" stroke-width="1"/></symbol>
+  <symbol id="i-shrimp" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" d="M16.2 6c-5.2.2-9.2 3.9-9.2 8.4 0 2.8 2 4.6 4.6 4.6"/><path fill="currentColor" d="M11.6 17.2 8.4 22l4.4-1.2 1.6 2.1.4-5.2z"/><circle cx="17" cy="6.2" r="2.4" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" d="M18.8 4.8c1.7-1.6 2.9-1.7 4-1.2M19.4 6.4c1.9-.4 3 .1 3.6.8"/><path fill="none" stroke="var(--bg, #110e0b)" stroke-width=".9" d="M9.4 9.8l2 1.4M7.6 13l2.3.5M8 16.4l2.2-.6"/></symbol>
+  <symbol id="i-cutlery" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18.5 3.5c-1.6 1.4-2.8 3.6-2 5.4L5.5 20.5"/><path d="M5.5 3.5l13 17"/><path d="M3.8 5.3l3.4-2.6M4.9 6.8l3.4-2.6"/></g></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l2.2 8.3 8.3 2.2-8.3 2.2L12 22.5l-2.2-8.3L1.5 12l8.3-2.2z"/></symbol>
+</svg>
 <!-- type: place (restaurante de mariscos en el Malecón de La Libertad)
      deal: hero place, nav nav-split, close close-word (type moment "name"), footer footer-columns, rhythm surface-pairs,
-     buttons solid, mark: provisional sun-over-waves (in place of the dealt leaf until the client's logo arrives),
+     buttons solid, mark: the logo's two beer mugs and script name; emblem redrawn in SVG,
      offer composition: dish tiles + ruled groups, place composition pair
-     palette: brand tokens (night-navy ink, sand ground, sunset accent) in place of the dealt palette; type bricolage
+     palette: the client logo (black, beer gold, foam cream) in place of the dealt palette; type Lobster (logo script) + Marcellus SC (logo caps) + Figtree
      moments: picture-develops (#lugar), word-highlight (#clientes)
      client brief adds: parallax on photographs only (hero, #lugar), ES/EN switch, WhatsApp order list -->
 <header class="nav nav--split">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top" data-i18n="skip">Ir al contenido</a>
     <a class="nav__logo" href="#top" aria-label="Restaurante La Bolera, inicio">
-      <svg class="brand-mark" viewBox="0 0 28 28" aria-hidden="true"><path class="sun" d="M7 15a7 7 0 0 1 14 0z"/><path class="sea" d="M4 18.5c1.6 0 1.6-1 3.3-1s1.6 1 3.3 1 1.6-1 3.4-1 1.6 1 3.3 1 1.6-1 3.3-1 1.7 1 3.4 1M4 22.5c1.6 0 1.6-1 3.3-1s1.6 1 3.3 1 1.6-1 3.4-1 1.6 1 3.3 1 1.6-1 3.3-1 1.7 1 3.4 1"/></svg>La Bolera
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 30"><use href="#i-mug"/></svg><svg viewBox="0 0 24 30"><use href="#i-mug"/></svg></span>La Bolera
     </a>
     <nav class="nav__links" aria-label="Principal" data-i18n-attr="aria-label:navMain">
       <div class="nav__item">
@@ -188,6 +210,7 @@
     </picture>
     <div class="wrap"><div class="hero-text">
       <div class="hero__text">
+        <p class="orn"><span data-i18n="heroOrn">Restaurante</span></p>
         <h1 id="hero-h" data-i18n="heroH">Mariscos en el Malecón de La Libertad</h1>
         <p class="hero__lead" data-i18n="heroLead">Ceviches y calamares hechos al momento, de 3&nbsp;p.&nbsp;m. a 2&nbsp;a.&nbsp;m. Martes cerrado.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#pedido"><span data-i18n="ctaOrder">Pedir por WhatsApp</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
@@ -267,7 +290,7 @@
       <div class="grid grid--top">
         <div class="span-4">
           <figure class="group-photo"><img src="assets/img/photo-f3749415-960.webp" srcset="assets/img/photo-f3749415-500.webp 500w, assets/img/photo-f3749415-960.webp 960w" sizes="(max-width: 639px) 100vw, 384px" alt="Ceviche de pescado con cebolla morada, maíz y camote" data-i18n-attr="alt:altGCev" loading="lazy" data-source="stand-in" data-subject="ceviche de pescado"></figure>
-          <p class="t-label" data-i18n="gCev">Ceviches y cócteles</p>
+          <p class="t-label"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shrimp"/></svg><span data-i18n="gCev">Ceviches y cócteles</span></p>
           <ul class="rows rows--menu">
             <li><span class="rows__name" data-i18n="iCevPes">Ceviche de pescado</span><span class="rows__value" data-assumed>$7.25</span><button class="add-icon" type="button" data-add="cev-pes" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
             <li><span class="rows__name" data-i18n="iCevMix">Ceviche mixto</span><span class="rows__value" data-assumed>$9.75</span><button class="add-icon" type="button" data-add="cev-mix" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
@@ -278,7 +301,7 @@
         </div>
         <div class="span-4">
           <figure class="group-photo"><img src="assets/img/photo-f31370074-960.webp" srcset="assets/img/photo-f31370074-500.webp 500w, assets/img/photo-f31370074-960.webp 960w" sizes="(max-width: 639px) 100vw, 384px" alt="Sopa de mariscos con camarones y almejas" data-i18n-attr="alt:altGMain" loading="lazy" data-source="stand-in" data-subject="sopa de mariscos"></figure>
-          <p class="t-label" data-i18n="gMain">Platos fuertes</p>
+          <p class="t-label"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fish"/></svg><span data-i18n="gMain">Platos fuertes</span></p>
           <ul class="rows rows--menu">
             <li><span class="rows__name" data-i18n="iPargo">Pargo entero frito</span><span class="rows__value" data-assumed>$13.75</span><button class="add-icon" type="button" data-add="pargo" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
             <li><span class="rows__name" data-i18n="iAjillo">Camarones al ajillo</span><span class="rows__value" data-assumed>$10.25</span><button class="add-icon" type="button" data-add="ajillo" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
@@ -289,7 +312,7 @@
         </div>
         <div class="span-4">
           <figure class="group-photo"><img src="assets/img/photo-f146030558-960.webp" srcset="assets/img/photo-f146030558-500.webp 500w, assets/img/photo-f146030558-960.webp 960w" sizes="(max-width: 639px) 100vw, 384px" alt="Michelada de tamarindo con limón y borde de chile" data-i18n-attr="alt:altGDrinks" loading="lazy" data-source="stand-in" data-subject="michelada"></figure>
-          <p class="t-label" data-i18n="gDrinks">Bebidas</p>
+          <p class="t-label"><svg class="ic" viewBox="0 0 24 30" aria-hidden="true"><use href="#i-mug"/></svg><span data-i18n="gDrinks">Bebidas</span></p>
           <ul class="rows rows--menu">
             <li><span class="rows__name" data-i18n="iMich">Michelada</span><span class="rows__value" data-assumed>$3.50</span><button class="add-icon" type="button" data-add="mich" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
             <li><span class="rows__name" data-i18n="iBeer">Cerveza nacional</span><span class="rows__value" data-assumed>$2.25</span><button class="add-icon" type="button" data-add="beer" aria-label="Agregar"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
@@ -308,9 +331,25 @@
         <h2 class="t-label" id="clientes-h" data-i18n="revH">Lo que cuentan nuestros clientes en Google Maps</h2>
         <p class="mo-wh__text" data-i18n-html="revText">La vista de noche desde el Malecón, la comida hecha al momento, los <strong>ceviches enormes</strong> y los calamares.</p>
       </div>
-      <div class="sunset span-5" aria-hidden="true">
-        <div class="sunset__sky"><span class="sunset__sun" data-sun></span></div>
-        <svg class="sunset__sea" viewBox="0 0 360 60" preserveAspectRatio="none"><path d="M0 12c15 0 15-7 30-7s15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7M0 32c15 0 15-7 30-7s15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7M0 52c15 0 15-7 30-7s15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7 15-7 30-7 15 7 30 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <div class="emblem-wrap span-5" data-sun aria-hidden="true">
+        <svg class="emblem" viewBox="0 0 320 320">
+          <g class="ring">
+            <circle cx="160" cy="165" r="138" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="745 122" transform="rotate(-104 160 165)"/>
+            <g transform="translate(52 30) rotate(-38) scale(2.3)" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 6v20"/><path d="M8 1v6a4 4 0 0 0 8 0V1M12 1v6"/></g>
+          </g>
+          <g class="float">
+            <g transform="translate(92 38) rotate(-12) scale(2.6)"><use href="#i-mug" width="24" height="30"/></g>
+            <g transform="translate(228 30) rotate(12) scale(-2.6 2.6)"><use href="#i-mug" width="24" height="30"/></g>
+            <use href="#i-spark" x="96" y="20" width="16" height="16"/><use href="#i-spark" x="230" y="12" width="14" height="14"/><use href="#i-spark" x="246" y="54" width="10" height="10"/>
+          </g>
+          <g class="float-b">
+            <use href="#i-fish" x="30" y="96" width="56" height="56" transform="rotate(-24 58 124)"/>
+            <use href="#i-shrimp" x="236" y="92" width="54" height="54" transform="rotate(10 263 119)"/>
+          </g>
+          <text x="160" y="214" text-anchor="middle" font-family="Lobster, cursive" font-size="60">La Bolera</text>
+          <text x="160" y="248" text-anchor="middle" font-family="Marcellus SC, serif" font-size="17" letter-spacing="6">RESTAURANTE</text>
+          <use href="#i-cutlery" x="148" y="258" width="24" height="24"/>
+        </svg>
       </div>
     </div>
   </section>
@@ -353,12 +392,12 @@
         <div><h2 id="close-h" data-i18n="closeH">Le esperamos en el Malecón</h2><p class="t-lead" data-i18n="closeLead">De 3&nbsp;p.&nbsp;m. a 2&nbsp;a.&nbsp;m. Martes cerrado.</p></div>
         <a class="btn btn--primary" href="#pedido"><span data-i18n="ctaOrder">Pedir por WhatsApp</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
-      <p class="close__word" aria-hidden="true">La B<svg class="o-sun" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5"/></svg>lera</p>
+      <p class="close__word" aria-hidden="true">La Bolera<span class="caps">Restaurante</span></p>
     </div>
     <div class="closing__links">
       <div class="grid">
         <div class="span-4 stack-4">
-          <a class="nav__logo" href="#top" aria-label="Restaurante La Bolera, inicio"><svg class="brand-mark" viewBox="0 0 28 28" aria-hidden="true"><path class="sun" d="M7 15a7 7 0 0 1 14 0z"/><path class="sea" d="M4 18.5c1.6 0 1.6-1 3.3-1s1.6 1 3.3 1 1.6-1 3.4-1 1.6 1 3.3 1 1.6-1 3.3-1 1.7 1 3.4 1M4 22.5c1.6 0 1.6-1 3.3-1s1.6 1 3.3 1 1.6-1 3.4-1 1.6 1 3.3 1 1.6-1 3.3-1 1.7 1 3.4 1"/></svg>La Bolera</a>
+          <a class="nav__logo" href="#top" aria-label="Restaurante La Bolera, inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 30"><use href="#i-mug"/></svg><svg viewBox="0 0 24 30"><use href="#i-mug"/></svg></span>La Bolera</a>
           <p class="footer__lede" data-i18n="footLede">Restaurante de mariscos en el Malecón del Puerto de La Libertad.</p>
         </div>
         <div class="span-3 footer__col"><h3 data-i18n="navVisit">Visita</h3><ul><li><a href="#visita" data-i18n="addrShort">Malecón, La Libertad</a></li><li><a href="#visita" data-i18n="footHours">Horario</a></li></ul></div>

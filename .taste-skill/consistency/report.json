@@ -1,7 +1,7 @@
 {
  "page": "/home/user/la-bolera/index.html",
  "url": "http://127.0.0.1:5200/index.html",
- "at": "2026-11-24T23:44:17.041Z",
+ "at": "2026-11-24T23:53:40.762Z",
  "out": "/home/user/la-bolera/.taste-skill/consistency",
  "widths": [
   {
@@ -28,7 +28,7 @@
      "text": "La vista de noche desde el Malecón, la comida he",
      "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
      "stop": 5,
-     "crop": "1440-12-scroll-reveal.jpg",
+     "crop": "1440-09-scroll-reveal.jpg",
      "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view"
     },
     {
@@ -38,7 +38,7 @@
      "text": "",
      "msg": "starts an animation (1.6 s) the moment it is scrolled into view (an IntersectionObserver) on img (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
      "stop": 6,
-     "crop": "1440-13-scroll-reveal.jpg",
+     "crop": "1440-11-scroll-reveal.jpg",
      "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view"
     },
     {
@@ -67,7 +67,7 @@
      "sel": "main#top > section.hero.hero--place > picture.hero__bg > img",
      "text": "photo-f139470769.webp",
      "stop": 0,
-     "msg": "9 photographs in more than one look: saturation from 0.27 to 0.79; warm and cool photographs mixed (b* -22 to +25); the odd one out is photo-f139470769.webp",
+     "msg": "9 photographs in more than one look: saturation from 0.27 to 0.80; warm and cool photographs mixed (b* -22 to +25); the odd one out is photo-f139470769.webp",
      "crop": "1440-02-photo-set.jpg",
      "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out"
     },
@@ -147,34 +147,14 @@
      "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls"
     },
     {
-     "check": "visual-caption",
+     "check": "split-align",
      "sev": "WARN",
-     "sel": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(1) > p.t-label",
-     "text": "Ceviches y cócteles",
-     "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f3749415-500.webp: it reads as a caption: \"Ceviches y cócteles\"; no caption or description under any image, render or visual (house rule)",
-     "stop": 3,
-     "crop": "1440-09-visual-caption.jpg",
-     "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line"
-    },
-    {
-     "check": "visual-caption",
-     "sev": "WARN",
-     "sel": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(2) > p.t-label",
-     "text": "Platos fuertes",
-     "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f31370074-500.webp: it reads as a caption: \"Platos fuertes\"; no caption or description under any image, render or visual (house rule)",
-     "stop": 3,
-     "crop": "1440-10-visual-caption.jpg",
-     "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line"
-    },
-    {
-     "check": "visual-caption",
-     "sev": "WARN",
-     "sel": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(3) > p.t-label",
-     "text": "Bebidas",
-     "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f146030558-500.webp: it reads as a caption: \"Bebidas\"; no caption or description under any image, render or visual (house rule)",
-     "stop": 3,
-     "crop": "1440-11-visual-caption.jpg",
-     "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line"
+     "sel": "section#clientes > div.wrap.grid",
+     "text": "Lo que cuentan nuestros clientes en Goog",
+     "msg": "the splits sit two ways: 1 to the top of the taller side (\"Lo que cuentan nuestro\"); 1 to the middle of the taller side (\"Todavía no hay platos.\")",
+     "fix": "set every split one way: the text to the top of its visual, or every one centred on it",
+     "stop": 5,
+     "crop": "1440-10-split-align.jpg"
     },
     {
      "check": "action-repeat",
@@ -183,7 +163,7 @@
      "text": "pedir por whatsapp",
      "stop": 11,
      "msg": "\"pedir por whatsapp\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
-     "crop": "1440-14-action-repeat.jpg",
+     "crop": "1440-12-action-repeat.jpg",
      "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once"
     },
     {
@@ -206,6 +186,16 @@
      "rule": "SR-2 T-total"
     },
     {
+     "check": "container-edges",
+     "sev": "FAIL",
+     "sel": "div.grid.grid--top > div.span-4:nth-of-type(1) > p.t-label > span",
+     "text": "Ceviches y cócteles",
+     "msg": "1 text block starts on a left line at x 156, 36px from the container's left: text starts on the container's left, or on one split line (x 630, 732, 834) (SR-6)",
+     "fix": "start the text on the container's left, or on the one split line every split shares",
+     "rule": "SR-6 T3-left-lines",
+     "crop": "1440-rhythm-01-container-edges.jpg"
+    },
+    {
      "check": "split-pair",
      "sev": "WARN",
      "sel": "section#clientes > div.wrap.grid",
@@ -213,7 +203,7 @@
      "msg": "the split's columns are off the page's one pair of lines: its right column starts at x 834, the first split's at 732; its right column starts at x 834, on none of the split lines 732 (k=6) (it is in a scroll scene: told as a WARN) (SR-8)",
      "fix": "start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it",
      "rule": "SR-8 T-pair",
-     "crop": "1440-rhythm-01-split-pair.jpg"
+     "crop": "1440-rhythm-02-split-pair.jpg"
     }
    ],
    "glAsked": 0
@@ -252,7 +242,7 @@
      "text": "La vista de noche desde el Malecón, la comida he",
      "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
      "stop": 6,
-     "crop": "390-08-scroll-reveal.jpg",
+     "crop": "390-07-scroll-reveal.jpg",
      "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view"
     },
     {
@@ -262,7 +252,7 @@
      "text": "",
      "msg": "starts an animation (1.6 s) the moment it is scrolled into view (an IntersectionObserver) on img (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
      "stop": 8,
-     "crop": "390-09-scroll-reveal.jpg",
+     "crop": "390-08-scroll-reveal.jpg",
      "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view"
     },
     {
@@ -270,7 +260,7 @@
      "sev": "WARN",
      "sel": "section#carta",
      "text": "La carta completa",
-     "msg": "pictures, effects and mocks cover 17% of this section; a feature section needs a visual (about 25% or more)",
+     "msg": "pictures, effects and mocks cover 16% of this section; a feature section needs a visual (about 25% or more)",
      "stop": 4,
      "crop": "390-06-no-visual.jpg",
      "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits"
@@ -281,7 +271,7 @@
      "sel": "main#top > section.hero.hero--place / section#visita",
      "text": "",
      "stop": 1,
-     "msg": "121px between these sections, -42% against the median 209px",
+     "msg": "120px between these sections, -42% against the median 208px",
      "crop": "390-03-section-gaps.jpg",
      "fix": "use one gap between sections (all within 25% of each other)"
     },
@@ -301,19 +291,9 @@
      "sel": "main#top > section.hero.hero--place > picture.hero__bg > img",
      "text": "photo-f139470769.webp",
      "stop": 0,
-     "msg": "8 photographs in more than one look: saturation from 0.25 to 0.74; warm and cool photographs mixed (b* -15 to +25); the odd one out is photo-f139470769.webp",
+     "msg": "8 photographs in more than one look: saturation from 0.25 to 0.75; warm and cool photographs mixed (b* -15 to +24); the odd one out is photo-f139470769.webp",
      "crop": "390-02-photo-set.jpg",
      "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out"
-    },
-    {
-     "check": "visual-caption",
-     "sev": "WARN",
-     "sel": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(1) > p.t-label",
-     "text": "Ceviches y cócteles",
-     "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f3749415-500.webp: it reads as a caption: \"Ceviches y cócteles\"; no caption or description under any image, render or visual (house rule)",
-     "stop": 4,
-     "crop": "390-07-visual-caption.jpg",
-     "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line"
     }
    ],
    "glAsked": 0
@@ -353,8 +333,8 @@
   "findings": []
  },
  "counts": {
-  "FAIL": 2,
-  "WARN": 28
+  "FAIL": 3,
+  "WARN": 25
  },
  "checks": {
   "assets": "PASS",
@@ -449,7 +429,7 @@
   "button-contrast": "PASS",
   "photo-print": "PASS",
   "grounds": "PASS",
-  "split-align": "PASS",
+  "split-align": "WARN",
   "fact-agree": "PASS",
   "fold-action": "PASS",
   "action-count": "PASS",
@@ -459,7 +439,7 @@
   "product-shown": "PASS",
   "same-object": "PASS",
   "font-load": "PASS",
-  "visual-caption": "WARN",
+  "visual-caption": "PASS",
   "visual-empty": "PASS",
   "effect-kind": "PASS",
   "hero-enter": "PASS",
@@ -474,7 +454,7 @@
   "section-air": "PASS",
   "one-section": "PASS",
   "one-heading": "PASS",
-  "container-edges": "PASS",
+  "container-edges": "FAIL",
   "row-lines": "PASS",
   "split-pair": "WARN",
   "motion-layer": "PASS",

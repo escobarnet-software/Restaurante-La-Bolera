@@ -29,7 +29,7 @@
     skip: 'Skip to content', navMain: 'Main', navToggle: 'Menu', navMenu: 'Menu', navPlace: 'The place', navOrder: 'Order', navVisit: 'Visit',
     navCev: 'Ceviches', navCevLine: 'From $7.25', navCoc: 'Cocktails', navCocLine: 'From $7.75', navFry: 'Fried and main plates', navFryLine: 'From $8.25',
     ctaOrder: 'Order on WhatsApp',
-    heroH: 'Seafood on the La Libertad Malecón', heroLead: 'Ceviches and calamari made to order, 3 p.m. to 2 a.m. Closed Tuesdays.',
+    heroOrn: 'Restaurant', heroH: 'Seafood on the La Libertad Malecón', heroLead: 'Ceviches and calamari made to order, 3 p.m. to 2 a.m. Closed Tuesdays.',
     heroAlt: 'The La Libertad Malecón at night, its lights reflected in the sea',
     visitH: 'Visit us on the Malecón', addr1: 'Malecón del Puerto', seeArea: 'See the area',
     dMon: 'Monday', dTue: 'Tuesday', dWedSun: 'Wednesday to Sunday', closed: 'Closed',
@@ -204,6 +204,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const px = [...document.querySelectorAll('[data-parallax]')];
   const sun = document.querySelector('[data-sun]');
+  const sunSection = sun && sun.closest('section');
   const heroImg = document.querySelector('.hero__bg img, img.hero__bg');
   let ticking = false;
   function frame() {
@@ -225,10 +226,10 @@
       heroImg.style.objectPosition = `50% ${y.toFixed(1)}%`;
     }
     if (sun) {
-      const r = sun.closest('section').getBoundingClientRect();
+      const r = sunSection.getBoundingClientRect();
       if (r.bottom > 0 && r.top < vh) {
         const t = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));   // 0 al entrar, 1 al salir
-        sun.style.setProperty('--sun', ((t - 0.35) * 70).toFixed(1) + '%');
+        sun.style.setProperty('--t', t.toFixed(3));
       }
     }
   }
