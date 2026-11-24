@@ -1,0 +1,436 @@
+{
+ "start": "2026-11-24T23:22:40.890Z",
+ "round": 3,
+ "idle": 0,
+ "errors": 0,
+ "status": "open",
+ "history": [
+  {
+   "at": "2026-11-24T23:38:38.628Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 17,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-24T23:41:10.848Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 5,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-24T23:44:03.379Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 3,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "index.html",
+  "url": null,
+  "root": null,
+  "kind": "place",
+  "category": "restaurante de mariscos en el Malecón",
+  "primary": "Pedir por WhatsApp",
+  "rounds": 3,
+  "start": "2026-11-24T23:22:40.890Z",
+  "by": "gate.mjs --start"
+ },
+ "manual": true,
+ "roundKey": "99c2cc0675b64f36:b3755e74",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "99c2cc0675b64f36",
+ "page": "index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "card-layout",
+    "where": "section#menu > div.wrap > div > div.grid \"Ceviche de camarón $8.50 Curtido en limó\"",
+    "msg": "4 of 4 cards drawn one way (one panel, ground, placement and fragment): copies of one card",
+    "fix": "a card layout at most twice on a page: build the other sections another way",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "card-layout"
+    ],
+    "wheres": [
+     "section#menu > div.wrap > div > div.grid \"Ceviche de camarón $8.50 Curtido en limó\""
+    ]
+   },
+   {
+    "check": "phone-number",
+    "where": "div.span-2.footer__col > ul > li:nth-of-type(1) > a \"https://wa.me/50374756008\"",
+    "msg": "a WhatsApp link calls a number in a real dialable format: \"https://wa.me/50374756008\"; a visitor can dial it and reach a stranger",
+    "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "phone-number"
+    ],
+    "wheres": [
+     "div.span-2.footer__col > ul > li:nth-of-type(1) > a \"https://wa.me/50374756008\""
+    ]
+   },
+   {
+    "check": "no-visual",
+    "where": "section#carta \"La carta completa\"",
+    "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "no-visual"
+    ],
+    "wheres": [
+     "section#carta \"La carta completa\""
+    ]
+   },
+   {
+    "check": "photo-upscale",
+    "where": "main#top > section.hero.hero--place > picture.hero__bg > img \"img: El Malecón de La Libertad de noche,\"",
+    "msg": "photo-f139470769-960.webp: 389x259 shown at 390x488, blown up 1.88x",
+    "fix": "use a source at least as wide as the picture is shown (twice that for sharp screens)",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "photo-upscale"
+    ],
+    "wheres": [
+     "main#top > section.hero.hero--place > picture.hero__bg > img \"img: El Malecón de La Libertad de noche,\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "scroll-reveal",
+    "where": "section#clientes > div.wrap.grid > div.span-7 > p.mo-wh__text \"La vista de noche desde el Malecón, la c\"",
+    "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#pedido > div.wrap > div.grid.grid--top > figure.develop.order-photo",
+    "msg": "starts an animation (1.6 s) the moment it is scrolled into view (an IntersectionObserver) on img (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headings",
+    "where": "h2#carta-h \"La carta completa\"",
+    "msg": "\"La carta completa\" names no product, part, place or section (the one brand line a page may have)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-buttons",
+    "where": "header.nav.nav--split > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Pedir por WhatsApp\"",
+    "msg": "\"Pedir por WhatsApp\" does not start with a verb (book, buy, try, start, get, see...)",
+    "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "main#top > section.hero.hero--place > picture.hero__bg > img \"photo-f139470769.webp\"",
+    "msg": "9 photographs in more than one look: saturation from 0.27 to 0.79; warm and cool photographs mixed (b* -22 to +25); the odd one out is photo-f139470769.webp",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-credit",
+    "where": "(the page text)",
+    "msg": "1 library source (wikimedia): the page credits wikimedia; confirm each shows the client's own product, place or people",
+    "fix": "confirm the library photograph shows the client's own product, place or people; otherwise replace it",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--split > div.wrap.nav__bar > a.nav__logo \"La Bolera\"",
+    "msg": "\"La Bolera\" opens a section headed \"Mariscos en el Malecón de La Libertad\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__item:nth-of-type(1) > div.nav__menu > div.wrap.grid > a.menu-card.span-4:nth-of-type(1) \"Ceviches Desde $7.25\"",
+    "msg": "\"Ceviches Desde $7.25\" opens a section headed \"Menú y precios\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__item:nth-of-type(1) > div.nav__menu > div.wrap.grid > a.menu-card.span-4:nth-of-type(2) \"Cócteles Desde $7.75\"",
+    "msg": "\"Cócteles Desde $7.75\" opens a section headed \"Menú y precios\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__item:nth-of-type(1) > div.nav__menu > div.wrap.grid > a.menu-card.span-4:nth-of-type(3) \"Frituras y platos fuertes Desde $8.25\"",
+    "msg": "\"Frituras y platos fuertes Desde $8.25\" opens a section headed \"Menú y precios\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(3) > a.nav__link \"Visita\"",
+    "msg": "\"Visita\" opens a section headed \"Visítenos en el Malecón\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-current",
+    "where": "header.nav.nav--split",
+    "msg": "the nav stays on screen with 3 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(1) > p.t-label \"Ceviches y cócteles\"",
+    "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f3749415-500.webp: it reads as a caption: \"Ceviches y cócteles\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(2) > p.t-label \"Platos fuertes\"",
+    "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f31370074-500.webp: it reads as a caption: \"Platos fuertes\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "div.wrap > div.grid.grid--top > div.span-4:nth-of-type(3) > p.t-label \"Bebidas\"",
+    "msg": "a muted 13px line of 1 row sits 24px under the picture photo-f146030558-500.webp: it reads as a caption: \"Bebidas\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav.nav--split > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"pedir por whatsapp\"",
+    "msg": "\"pedir por whatsapp\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "assumed",
+    "where": "div.grid:nth-of-type(2) > article.tile.dish:nth-of-type(1) > div.tile__head:nth-of-type(2) > span.tile__price \"$8.50\"",
+    "msg": "19 facts marked as assumed, for the report: \"$8.50\", \"$7.75\", \"$8.25\", \"$9.50\", \"$7.25\", \"$9.75\", \"$10.50\", \"$9.25\", \"$10.75\", \"$13.75\" and more",
+    "fix": "list each assumed fact in the report for the client to confirm, or take it from the brief",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-height",
+    "where": "main#top",
+    "msg": "the page is 7 screens long (6300px on a 900px screen): a place page runs 3 to 6 screens (over 7 FAIL) (SR-2)",
+    "fix": "keep a place page at 3 to 6 screens: merge a short block into the section above, or cut a section",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "split-pair",
+    "where": "section#clientes > div.wrap.grid \"Lo que cuentan nuestros clientes en Goog\"",
+    "msg": "the split's columns are off the page's one pair of lines: its right column starts at x 834, the first split's at 732; its right column starts at x 834, on none of the split lines 732 (k=6) (it is in a scroll scene: told as a WARN) (SR-8)",
+    "fix": "start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav",
+    "where": "header.nav.nav--split > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--place / section#visita",
+    "msg": "121px between these sections, -42% against the median 209px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "proximity",
+    "where": "section#menu > div.wrap > div > div.grid \"Ceviche de camarón $8.50 Curtido en limó\"",
+    "msg": "the rows sit 12px apart, about as close as a picture to its own caption (16px): a caption reads with the row below",
+    "fix": "set the gap between rows at twice the gap between a picture and its caption or more",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "main#top > section.hero.hero--place > picture.hero__bg > img \"photo-f139470769-960.webp\"",
+    "msg": "7 photographs in more than one look: saturation from 0.27 to 0.74; warm and cool photographs mixed (b* -15 to +25); the odd one out is photo-f139470769-960.webp",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 97,
+   "layout": 3
+  }
+ },
+ "open": [
+  {
+   "check": "phone-number",
+   "where": "div.span-2.footer__col > ul > li:nth-of-type(1) > a \"https://wa.me/50374756008\"",
+   "msg": "a WhatsApp link calls a number in a real dialable format: \"https://wa.me/50374756008\"; a visitor can dial it and reach a stranger",
+   "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "phone-number"
+   ],
+   "wheres": [
+    "div.span-2.footer__col > ul > li:nth-of-type(1) > a \"https://wa.me/50374756008\""
+   ]
+  },
+  {
+   "check": "no-visual",
+   "where": "section#carta \"La carta completa\"",
+   "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "no-visual"
+   ],
+   "wheres": [
+    "section#carta \"La carta completa\""
+   ]
+  },
+  {
+   "check": "photo-upscale",
+   "where": "main#top > section.hero.hero--place > picture.hero__bg > img \"img: El Malecón de La Libertad de noche,\"",
+   "msg": "photo-f139470769-960.webp: 389x259 shown at 390x488, blown up 1.88x",
+   "fix": "use a source at least as wide as the picture is shown (twice that for sharp screens)",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "photo-upscale"
+   ],
+   "wheres": [
+    "main#top > section.hero.hero--place > picture.hero__bg > img \"img: El Malecón de La Libertad de noche,\""
+   ]
+  }
+ ],
+ "waived": [
+  {
+   "check": "card-layout",
+   "where": "section#menu > div.wrap > div > div.grid \"Ceviche de camarón $8.50 Curtido en limó\"",
+   "msg": "4 of 4 cards drawn one way (one panel, ground, placement and fragment): copies of one card",
+   "fix": "a card layout at most twice on a page: build the other sections another way",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "card-layout"
+   ],
+   "wheres": [
+    "section#menu > div.wrap > div > div.grid \"Ceviche de camarón $8.50 Curtido en limó\""
+   ],
+   "reason": "The four dish tiles are the goods recipe of sections.md (four cards on span-3, photo, name, price, Add): one card style is the point of a menu grid."
+  }
+ ],
+ "warnCount": 23,
+ "at": "2026-11-24T23:44:03.379Z",
+ "openTold": true
+}

@@ -1,0 +1,11 @@
+{
+ "page": "index.html",
+ "url": null,
+ "root": null,
+ "kind": "place",
+ "category": "restaurante de mariscos en el Malecón",
+ "primary": "Pedir por WhatsApp",
+ "rounds": 3,
+ "start": "2026-11-24T23:22:40.890Z",
+ "by": "gate.mjs --start"
+}
