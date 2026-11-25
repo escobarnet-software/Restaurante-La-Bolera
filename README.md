@@ -4,7 +4,7 @@ Página web de vista previa para Restaurante La Bolera, en el Malecón del Puert
 Preparada por Escobar Net.
 
 - Menú digital con fotos y precios, en español e inglés (botón ES/EN).
-- Lista de pedido que se envía ordenada al WhatsApp del restaurante.
+- Reserva de mesa (día, hora de llegada, personas) y pedidos para pasar a recoger (día, hora y platos), enviados al WhatsApp del restaurante.
 - Parallax en las fotos y el sol de la marca que se pone sobre el mar.
 - Hecha para celular primero.
 

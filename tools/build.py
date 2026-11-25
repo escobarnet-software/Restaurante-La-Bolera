@@ -132,7 +132,7 @@ html = f'''<!doctype html>
         <button type="button" class="lang__opt" data-lang="es" aria-pressed="true" lang="es">ES</button>
         <button type="button" class="lang__opt" data-lang="en" aria-pressed="false" lang="en">EN</button>
       </div>
-      <a class="btn btn--primary btn--wa" href="#pedido">{WA_ICON}<span data-i18n="ctaOrder">Pedir por WhatsApp</span><span class="order-count" data-order-count hidden>0</span></a>
+      <a class="btn btn--primary btn--wa" href="#pedido">{WA_ICON}<span data-i18n="ctaNav">Reservar o pedir</span><span class="order-count" data-order-count hidden>0</span></a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú" data-i18n-attr="aria-label:navToggle">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -150,7 +150,7 @@ html = f'''<!doctype html>
         <h1 id="hero-h" class="e-2"><span data-i18n="heroH1">Mariscos frente al mar en el</span> <span class="gold" data-i18n="heroH2">Malecón de La Libertad</span></h1>
         <p class="lb-hero__lead e-3" data-i18n="heroLead">Ceviches enormes, calamares y micheladas hechos al momento, con la vista nocturna del Puerto.</p>
         <div class="lb-hero__actions e-4">
-          <a class="btn btn--primary btn--wa btn--lg" href="#pedido">{WA_ICON}<span data-i18n="ctaOrder">Pedir por WhatsApp</span></a>
+          <a class="btn btn--primary btn--wa btn--lg" href="#pedido" data-mode-link="reserve">{WA_ICON}<span data-i18n="ctaReserve">Reservar mesa</span></a>
           <a class="btn btn--ghost btn--lg" href="#menu"><span data-i18n="seeMenu">Ver el menú</span>{ARROW}</a>
         </div>
         <ul class="lb-hero__facts e-5">
@@ -173,7 +173,6 @@ html = f'''<!doctype html>
         <svg class="spark spark--3" viewBox="0 0 24 24"><use href="#i-spark"/></svg>
       </div>
     </div></div>
-    {marquee()}
   </section>
 
   <section class="section lb-visit" id="visita" data-place="visit" aria-labelledby="visita-h">
@@ -206,7 +205,7 @@ html = f'''<!doctype html>
           <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="menuOrn">Los favoritos</span></p>
           <h2 id="menu-h" data-i18n="menuH">Menú y precios</h2>
         </div>
-        <p class="lb-head__side" data-i18n="menuSide">Precios en dólares. Cada plato se prepara al pedirlo.</p>
+        <div class="lb-head__side"><p data-i18n="menuSide">Precios en dólares. Cada plato se prepara al pedirlo.</p><p class="demo-note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-info"/></svg><span data-i18n="demoNote">Precios y fotos de muestra para esta vista previa; se reemplazan por el menú real del restaurante.</span></p></div>
       </div>
       <div class="dishes">
 {dish_cards()}
@@ -251,29 +250,44 @@ html = f'''<!doctype html>
     <div class="wrap">
       <div class="lb-head lb-head--split" data-reveal>
         <div>
-          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="orderOrn">Para llevar o para la mesa</span></p>
-          <h2 id="pedido-h" data-i18n="orderH">Su pedido por WhatsApp</h2>
+          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="orderOrn">Reservas y pedidos para recoger</span></p>
+          <h2 id="pedido-h" data-i18n="orderH">Reserve su mesa o pida para recoger</h2>
         </div>
-        <p class="lb-head__side" data-i18n="orderSide">Agregue platos del menú; le confirmamos por WhatsApp.</p>
+        <p class="lb-head__side" data-i18n="orderSide">Elija la hora y le confirmamos por WhatsApp.</p>
       </div>
       <div class="grid grid--top lb-order__grid">
-        <form class="order span-6" id="order-form" action="https://wa.me/{WA}" method="get" target="_blank" novalidate>
-          <ul class="order__list" data-order-list aria-live="polite"></ul>
-          <p class="order__empty" data-order-empty data-i18n="orderEmpty">Todavía no hay platos. Toque Agregar en el menú.</p>
-          <div class="order__total"><span data-i18n="total">Total</span><span data-order-total>$0.00</span></div>
+        <form class="order span-6" id="order-form" action="https://wa.me/{WA}" method="get" target="_blank" novalidate data-mode="reserve">
+          <div class="mode" role="radiogroup" aria-label="Tipo de solicitud" data-i18n-attr="aria-label:modeGroup">
+            <label class="mode__opt"><input type="radio" name="tipo" value="reserve" checked><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cutlery"/></svg><span data-i18n="modeReserve">Reservar mesa</span></span></label>
+            <label class="mode__opt"><input type="radio" name="tipo" value="pickup"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bag"/></svg><span data-i18n="modePickup">Pasar a recoger</span></span></label>
+          </div>
           <div class="order__fields">
             <div class="field"><label for="o-name" data-i18n="fName">Nombre</label>
               <input id="o-name" name="nombre" type="text" autocomplete="name" aria-describedby="o-name-err">
-              <p class="field__error" id="o-name-err" hidden data-i18n="errName">Escriba el nombre para el pedido.</p></div>
-            <div class="field"><label for="o-mode" data-i18n="fMode">Cómo lo quiere</label>
-              <select id="o-mode" name="modo"><option value="here" data-i18n="modeHere">Para comer aquí</option><option value="go" data-i18n="modeGo">Para llevar</option></select></div>
+              <p class="field__error" id="o-name-err" hidden data-i18n="errName">Escriba el nombre para la reserva o el pedido.</p></div>
+            <div class="field" data-only="reserve"><label for="o-people" data-i18n="fPeople">Personas</label>
+              <input id="o-people" name="personas" type="number" inputmode="numeric" min="1" max="40" value="2" aria-describedby="o-people-err">
+              <p class="field__error" id="o-people-err" hidden data-i18n="errPeople">Escriba cuántas personas vienen.</p></div>
+            <div class="field"><label for="o-date" data-i18n="fDate">Día</label>
+              <input id="o-date" name="dia" type="date" aria-describedby="o-date-err">
+              <p class="field__error" id="o-date-err" hidden data-i18n="errDate">Elija el día; los martes estamos cerrados.</p></div>
+            <div class="field"><label for="o-time"><span data-only="reserve" data-i18n="fTimeReserve">Hora de llegada</span><span data-only="pickup" data-i18n="fTimePickup">Hora para recoger</span></label>
+              <input id="o-time" name="hora" type="time" step="900" value="19:00" aria-describedby="o-time-err o-time-hint">
+              <p class="field__hint" id="o-time-hint" data-i18n="timeHint">De 3:00 p. m. a 2:00 a. m.</p>
+              <p class="field__error" id="o-time-err" hidden data-i18n="errTime">Elija una hora entre las 3:00 p. m. y las 2:00 a. m.</p></div>
+          </div>
+          <div class="order__cart">
+            <p class="order__cart-label"><span data-only="reserve" data-i18n="cartReserve">Platos para tener listos (opcional)</span><span data-only="pickup" data-i18n="cartPickup">Su pedido</span></p>
+            <ul class="order__list" data-order-list aria-live="polite"></ul>
+            <p class="order__empty" data-order-empty data-i18n="orderEmpty">Todavía no hay platos. Toque Agregar en el menú.</p>
+            <div class="order__total"><span data-i18n="total">Total</span><span data-order-total>$0.00</span></div>
           </div>
           <div class="field"><label for="o-note" data-i18n="fNote">Nota (opcional)</label>
             <input id="o-note" name="nota" type="text" autocomplete="off"></div>
           <input type="hidden" name="text" value="">
-          <p class="order__error" data-order-error hidden role="alert" data-i18n="errEmpty">Agregue al menos un plato del menú.</p>
-          <button class="btn btn--primary btn--wa btn--lg order__send" type="submit">{WA_ICON}<span data-i18n="ctaOrder">Pedir por WhatsApp</span></button>
-          <p class="t-small muted" data-i18n="orderNote">Se abre WhatsApp con su pedido listo para enviar.</p>
+          <p class="order__error" data-order-error hidden role="alert" data-i18n="errEmpty">Para pasar a recoger, agregue al menos un plato del menú.</p>
+          <button class="btn btn--primary btn--wa btn--lg order__send" type="submit">{WA_ICON}<span data-only="reserve" data-i18n="sendReserve">Enviar reserva por WhatsApp</span><span data-only="pickup" data-i18n="sendPickup">Enviar pedido por WhatsApp</span></button>
+          <p class="t-small muted" data-i18n="orderNote">Se abre WhatsApp con su mensaje listo; el restaurante le confirma por ahí.</p>
         </form>
         <figure class="frame-ticket span-6 start-7" data-moment="picture-develops"><img src="assets/img/photo-f106961743.webp" alt="Mojarra frita servida con aguacate, tomate y arroz" data-i18n-attr="alt:orderAlt" loading="lazy" data-source="stand-in" data-subject="mojarra frita"></figure>
       </div>
@@ -290,13 +304,13 @@ html = f'''<!doctype html>
         <h2 id="close-h" data-i18n="closeH">Le esperamos en el Malecón</h2>
         <p class="lb-close__lead" data-i18n="closeLead">Mesas frente al mar, mariscos al momento y la cerveza bien fría. Abrimos de 3 p.&nbsp;m. a 2 a.&nbsp;m.; martes cerrado.</p>
         <div class="lb-hero__actions">
-          <a class="btn btn--primary btn--wa btn--lg" href="#pedido">{WA_ICON}<span data-i18n="ctaOrder">Pedir por WhatsApp</span></a>
-          <a class="btn btn--ghost btn--lg" href="{MAP}" target="_blank" rel="noopener"><span data-i18n="seeArea">Ver la zona</span>{ARROW}</a>
+          <a class="btn btn--primary btn--wa btn--lg" href="#pedido" data-mode-link="reserve">{WA_ICON}<span data-i18n="ctaReserve">Reservar mesa</span></a>
+          <a class="btn btn--ghost btn--lg" href="#pedido" data-mode-link="pickup"><span data-i18n="ctaPickup">Pedir para recoger</span>{ARROW}</a>
         </div>
         <ul class="close-info">
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span><strong data-i18n="ciPlaceK">Dónde</strong><span data-i18n="ciPlaceV">Malecón del Puerto de La Libertad</span></span></li>
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg><span><strong data-i18n="ciHoursK">Horario</strong><span data-i18n="ciHoursV">Lun y mié a dom, 3 p.&nbsp;m. a 2 a.&nbsp;m.</span></span></li>
-          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mug"/></svg><span><strong data-i18n="ciGoK">Para llevar</strong><span data-i18n="ciGoV">Pedidos por WhatsApp</span></span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span><strong data-i18n="ciGoK">Reservas y pedidos</strong><span data-i18n="ciGoV">Por WhatsApp, con la hora que usted elija</span></span></li>
         </ul>
       </div>
     </div>
@@ -311,7 +325,7 @@ html = f'''<!doctype html>
 </footer>
 
 <nav class="actionbar" aria-label="Acciones rápidas">
-  <a class="btn btn--primary btn--wa" href="#pedido">{WA_ICON}<span data-i18n="ctaOrder">Pedir por WhatsApp</span><span class="order-count" data-order-count hidden>0</span></a>
+  <a class="btn btn--primary btn--wa" href="#pedido">{WA_ICON}<span data-i18n="ctaNav">Reservar o pedir</span><span class="order-count" data-order-count hidden>0</span></a>
 </nav>
 
 <script type="module" src="assets/system.js"></script>

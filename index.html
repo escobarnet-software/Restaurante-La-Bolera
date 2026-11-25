@@ -61,13 +61,19 @@
   .lb-head { margin-bottom: 48px; }
   .lb-head h2 { font: 400 clamp(38px, 4.4vw, 60px)/1.05 var(--font-display); letter-spacing: 0; color: var(--cream); margin: 0; }
   .lb-head--split { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .lb-head__side { max-width: 36ch; color: var(--p-muted); margin: 0; font-size: 17px; }
+  .lb-head__side { max-width: 40ch; color: var(--p-muted); margin: 0; font-size: 17px; }
+  .lb-head__side p { margin: 0; }
+  .demo-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px !important; padding: 10px 14px; border-radius: 12px; border: 1px dashed rgba(220, 166, 75, .45); background: rgba(220, 166, 75, .07); color: var(--cream); font-size: 14px; line-height: 1.45; }
+  .demo-note .ic { color: var(--gold); font-size: 18px; margin-top: 1px; }
 
   /* botones */
   .btn--wa, .btn--ghost { border-radius: 999px !important; gap: 10px; }
-  .btn--wa { background: linear-gradient(180deg, var(--gold-hi), var(--gold) 60%, #c98f33) !important; color: #15100a !important; border: 0 !important;
-    box-shadow: 0 10px 30px -10px rgba(220, 166, 75, .65), inset 0 1px 0 rgba(255, 255, 255, .35); font-weight: 600; }
-  .btn--wa:hover { box-shadow: 0 14px 36px -10px rgba(220, 166, 75, .85), inset 0 1px 0 rgba(255, 255, 255, .45); transform: translateY(-1px); }
+  /* botón principal: dorado liso, sin degradado; el ícono de WhatsApp en una ficha oscura */
+  .btn--wa { background: var(--gold) !important; color: #15100a !important; border: 1px solid var(--gold) !important; font-weight: 600; padding-left: 6px !important; box-shadow: none; transition: background 200ms, color 200ms, transform 160ms, box-shadow 200ms; }
+  .btn--wa .ic-wa { box-sizing: content-box; width: 18px; height: 18px; padding: 9px; border-radius: 50%; background: #15100a; color: var(--gold); }
+  .btn--wa:hover { background: var(--cream) !important; border-color: var(--cream) !important; box-shadow: 0 0 0 4px rgba(220, 166, 75, .25); }
+  .btn--wa:active { transform: scale(.97); }
+  .btn--lg.btn--wa .ic-wa { padding: 10px; }
   .btn--ghost { background: transparent; color: var(--gold); border: 1px solid rgba(220, 166, 75, .55); }
   .btn--ghost:hover { background: rgba(220, 166, 75, .1); border-color: var(--gold); }
   .btn--lg { height: 56px; padding: 0 28px; font-size: 16px; }
@@ -89,13 +95,13 @@
   @media (max-width: 1023px) { .lb-nav .nav__logo-img { height: 48px !important; width: 48px !important; } }
 
   /* ---------- portada ---------- */
-  .hero.lb-hero { position: relative; display: block; height: auto; min-height: 100svh; padding: calc(var(--nav) + 32px) 0 128px; overflow: hidden;
+  .hero.lb-hero { position: relative; display: block; height: auto; min-height: 100svh; padding: calc(var(--nav) + 32px) 0 96px; overflow: hidden;
     background: radial-gradient(60% 70% at 78% 40%, rgba(220, 166, 75, .16), transparent 70%), radial-gradient(40% 50% at 10% 90%, rgba(220, 166, 75, .07), transparent 70%), var(--p-bg); }
   .lb-hero__glow { position: absolute; inset: 0; pointer-events: none; background: repeating-radial-gradient(circle at 78% 40%, rgba(220, 166, 75, .05) 0 1px, transparent 1px 46px); mask: radial-gradient(50% 60% at 78% 40%, #000, transparent); }
-  .lb-hero__waves { position: absolute; left: 0; right: 0; bottom: 54px; width: 100%; height: 90px; fill: rgba(220, 166, 75, .06); animation: bob 7s ease-in-out infinite; }
+  .lb-hero__waves { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 90px; fill: rgba(220, 166, 75, .06); animation: bob 7s ease-in-out infinite; }
   .lb-hero__waves .w2 { fill: rgba(220, 166, 75, .08); }
   @keyframes bob { 50% { transform: translateY(8px); } }
-  .lb-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; min-height: calc(100svh - var(--nav) - 160px); }
+  .lb-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; min-height: calc(100svh - var(--nav) - 128px); }
   .lb-hero__logo { display: block; width: clamp(120px, 12vw, 176px); height: auto; margin: 0 0 12px -10px; filter: drop-shadow(0 0 28px rgba(220, 166, 75, .3)); animation: float 6s ease-in-out infinite; }
   @keyframes float { 50% { transform: translateY(-8px) rotate(-1.5deg); } }
   .lb-hero h1 { font: 400 clamp(44px, 5.2vw, 78px)/1.04 var(--font-display); letter-spacing: 0; color: var(--cream); margin: 0; max-width: 13ch; text-wrap: balance; }
@@ -162,7 +168,7 @@
     .lb-hero__lead { font-size: 17px; }
     .lb-hero__actions .btn { width: 100%; justify-content: center; }
     .float-ic { width: 44px; height: 44px; } .float-ic--shrimp { width: 40px; height: 40px; }
-    .lb-hero__waves { bottom: 50px; height: 60px; }
+    .lb-hero__waves { bottom: 0; height: 60px; }
     .marquee__track { font-size: 14px; }
   }
 
@@ -265,12 +271,25 @@
   .order__empty { color: var(--p-muted); margin: 0; padding: 18px; border: 1px dashed rgba(220, 166, 75, .3); border-radius: 14px; text-align: center; }
   .order__total { display: flex; justify-content: space-between; align-items: baseline; font: 400 28px/1 var(--font-display); color: var(--cream); }
   .order__total [data-order-total] { color: var(--gold); }
-  .order__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .order__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
   .order .field input, .order .field select { width: 100%; height: 50px; padding: 0 16px; border: 1px solid rgba(220, 166, 75, .3); border-radius: 14px; background: #0b0907; color: var(--cream); font: 400 16px/1 var(--font-text); }
   .order .field input:focus, .order .field select:focus { border-color: var(--gold); outline: 2px solid rgba(220, 166, 75, .35); outline-offset: 1px; }
   .order .field label { display: block; margin-bottom: 6px; font-size: 14px; color: var(--p-muted); }
   .order .field__error, .order__error { color: #ffb39c; font-size: 14px; margin: 6px 0 0; }
   .order__send { width: 100%; justify-content: center; }
+  .mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; border-radius: 999px; border: 1px solid rgba(220, 166, 75, .35); background: #0b0907; }
+  .mode__opt { position: relative; cursor: pointer; }
+  .mode__opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .mode__opt > span { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; border-radius: 999px; color: var(--p-muted); font-weight: 600; font-size: 15px; transition: background 200ms, color 200ms; }
+  .mode__opt > span .ic { font-size: 18px; }
+  .mode__opt input:checked + span { background: var(--gold); color: #15100a; }
+  .mode__opt input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .order[data-mode="reserve"] [data-only="pickup"], .order[data-mode="pickup"] [data-only="reserve"] { display: none !important; }
+  .order__cart { display: grid; gap: 12px; padding: 16px; border-radius: 16px; background: rgba(255, 255, 255, .025); border: 1px solid rgba(220, 166, 75, .15); }
+  .order__cart-label { margin: 0; color: var(--gold); font: 400 14px/1.3 var(--font-caps); letter-spacing: .12em; }
+  .order__total { font-size: 22px !important; }
+  .field__hint { margin: 6px 0 0; font-size: 13px; color: var(--p-muted); }
+  .order .field input[type="date"], .order .field input[type="time"] { color-scheme: dark; }
   .frame-ticket { position: relative; margin: 0; min-height: 420px; border-radius: 24px; overflow: hidden;
     -webkit-mask: radial-gradient(circle 22px at 0 50%, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 22px at 100% 50%, #0000 97%, #000) right / 51% 100% no-repeat;
             mask: radial-gradient(circle 22px at 0 50%, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 22px at 100% 50%, #0000 97%, #000) right / 51% 100% no-repeat; }
@@ -326,6 +345,8 @@
   <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 3.2A8.8 8.8 0 1 0 20.8 15 7.2 7.2 0 0 1 15.5 3.2z"/><path fill="currentColor" d="M18.5 3l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
   <symbol id="i-flame" viewBox="0 0 24 24"><path fill="currentColor" d="M12.5 2c.6 3.4 4.8 5.6 4.8 10.6A5.4 5.4 0 0 1 12 18a5.3 5.3 0 0 1-5.3-5.3c0-2.4 1.3-4 2.3-5 .1 1.6.8 2.8 2 3.4C10.5 7.6 11.5 4.6 12.5 2z"/><path fill="currentColor" d="M5 20h14v1.8H5z"/></symbol>
   <symbol id="i-ring" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="3"><circle cx="9" cy="10" r="5"/><circle cx="15.5" cy="15" r="4.2"/></g></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3" stroke-linecap="round"/></g></symbol>
 </svg>
 
 <header class="nav nav--split lb-nav">
@@ -343,7 +364,7 @@
         <button type="button" class="lang__opt" data-lang="es" aria-pressed="true" lang="es">ES</button>
         <button type="button" class="lang__opt" data-lang="en" aria-pressed="false" lang="en">EN</button>
       </div>
-      <a class="btn btn--primary btn--wa" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaOrder">Pedir por WhatsApp</span><span class="order-count" data-order-count hidden>0</span></a>
+      <a class="btn btn--primary btn--wa" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaNav">Reservar o pedir</span><span class="order-count" data-order-count hidden>0</span></a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú" data-i18n-attr="aria-label:navToggle">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -361,7 +382,7 @@
         <h1 id="hero-h" class="e-2"><span data-i18n="heroH1">Mariscos frente al mar en el</span> <span class="gold" data-i18n="heroH2">Malecón de La Libertad</span></h1>
         <p class="lb-hero__lead e-3" data-i18n="heroLead">Ceviches enormes, calamares y micheladas hechos al momento, con la vista nocturna del Puerto.</p>
         <div class="lb-hero__actions e-4">
-          <a class="btn btn--primary btn--wa btn--lg" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaOrder">Pedir por WhatsApp</span></a>
+          <a class="btn btn--primary btn--wa btn--lg" href="#pedido" data-mode-link="reserve"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaReserve">Reservar mesa</span></a>
           <a class="btn btn--ghost btn--lg" href="#menu"><span data-i18n="seeMenu">Ver el menú</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
         </div>
         <ul class="lb-hero__facts e-5">
@@ -384,7 +405,6 @@
         <svg class="spark spark--3" viewBox="0 0 24 24"><use href="#i-spark"/></svg>
       </div>
     </div></div>
-    <div class="marquee" aria-hidden="true"><div class="marquee__track"><span data-i18n="mq1">Ceviches</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq2">Cócteles de camarón</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq3">Calamares</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq4">Mojarra frita</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq5">Micheladas</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq6">Vista al mar</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq1">Ceviches</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq2">Cócteles de camarón</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq3">Calamares</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq4">Mojarra frita</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq5">Micheladas</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="mq6">Vista al mar</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg></div></div>
   </section>
 
   <section class="section lb-visit" id="visita" data-place="visit" aria-labelledby="visita-h">
@@ -425,7 +445,7 @@
           <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><span data-i18n="menuOrn">Los favoritos</span></p>
           <h2 id="menu-h" data-i18n="menuH">Menú y precios</h2>
         </div>
-        <p class="lb-head__side" data-i18n="menuSide">Precios en dólares. Cada plato se prepara al pedirlo.</p>
+        <div class="lb-head__side"><p data-i18n="menuSide">Precios en dólares. Cada plato se prepara al pedirlo.</p><p class="demo-note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-info"/></svg><span data-i18n="demoNote">Precios y fotos de muestra para esta vista previa; se reemplazan por el menú real del restaurante.</span></p></div>
       </div>
       <div class="dishes">
           <article class="dish" data-reveal style="--i: 0">
@@ -546,29 +566,44 @@
     <div class="wrap">
       <div class="lb-head lb-head--split" data-reveal>
         <div>
-          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="orderOrn">Para llevar o para la mesa</span></p>
-          <h2 id="pedido-h" data-i18n="orderH">Su pedido por WhatsApp</h2>
+          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="orderOrn">Reservas y pedidos para recoger</span></p>
+          <h2 id="pedido-h" data-i18n="orderH">Reserve su mesa o pida para recoger</h2>
         </div>
-        <p class="lb-head__side" data-i18n="orderSide">Agregue platos del menú; le confirmamos por WhatsApp.</p>
+        <p class="lb-head__side" data-i18n="orderSide">Elija la hora y le confirmamos por WhatsApp.</p>
       </div>
       <div class="grid grid--top lb-order__grid">
-        <form class="order span-6" id="order-form" action="https://wa.me/50374756008" method="get" target="_blank" novalidate>
-          <ul class="order__list" data-order-list aria-live="polite"></ul>
-          <p class="order__empty" data-order-empty data-i18n="orderEmpty">Todavía no hay platos. Toque Agregar en el menú.</p>
-          <div class="order__total"><span data-i18n="total">Total</span><span data-order-total>$0.00</span></div>
+        <form class="order span-6" id="order-form" action="https://wa.me/50374756008" method="get" target="_blank" novalidate data-mode="reserve">
+          <div class="mode" role="radiogroup" aria-label="Tipo de solicitud" data-i18n-attr="aria-label:modeGroup">
+            <label class="mode__opt"><input type="radio" name="tipo" value="reserve" checked><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cutlery"/></svg><span data-i18n="modeReserve">Reservar mesa</span></span></label>
+            <label class="mode__opt"><input type="radio" name="tipo" value="pickup"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bag"/></svg><span data-i18n="modePickup">Pasar a recoger</span></span></label>
+          </div>
           <div class="order__fields">
             <div class="field"><label for="o-name" data-i18n="fName">Nombre</label>
               <input id="o-name" name="nombre" type="text" autocomplete="name" aria-describedby="o-name-err">
-              <p class="field__error" id="o-name-err" hidden data-i18n="errName">Escriba el nombre para el pedido.</p></div>
-            <div class="field"><label for="o-mode" data-i18n="fMode">Cómo lo quiere</label>
-              <select id="o-mode" name="modo"><option value="here" data-i18n="modeHere">Para comer aquí</option><option value="go" data-i18n="modeGo">Para llevar</option></select></div>
+              <p class="field__error" id="o-name-err" hidden data-i18n="errName">Escriba el nombre para la reserva o el pedido.</p></div>
+            <div class="field" data-only="reserve"><label for="o-people" data-i18n="fPeople">Personas</label>
+              <input id="o-people" name="personas" type="number" inputmode="numeric" min="1" max="40" value="2" aria-describedby="o-people-err">
+              <p class="field__error" id="o-people-err" hidden data-i18n="errPeople">Escriba cuántas personas vienen.</p></div>
+            <div class="field"><label for="o-date" data-i18n="fDate">Día</label>
+              <input id="o-date" name="dia" type="date" aria-describedby="o-date-err">
+              <p class="field__error" id="o-date-err" hidden data-i18n="errDate">Elija el día; los martes estamos cerrados.</p></div>
+            <div class="field"><label for="o-time"><span data-only="reserve" data-i18n="fTimeReserve">Hora de llegada</span><span data-only="pickup" data-i18n="fTimePickup">Hora para recoger</span></label>
+              <input id="o-time" name="hora" type="time" step="900" value="19:00" aria-describedby="o-time-err o-time-hint">
+              <p class="field__hint" id="o-time-hint" data-i18n="timeHint">De 3:00 p. m. a 2:00 a. m.</p>
+              <p class="field__error" id="o-time-err" hidden data-i18n="errTime">Elija una hora entre las 3:00 p. m. y las 2:00 a. m.</p></div>
+          </div>
+          <div class="order__cart">
+            <p class="order__cart-label"><span data-only="reserve" data-i18n="cartReserve">Platos para tener listos (opcional)</span><span data-only="pickup" data-i18n="cartPickup">Su pedido</span></p>
+            <ul class="order__list" data-order-list aria-live="polite"></ul>
+            <p class="order__empty" data-order-empty data-i18n="orderEmpty">Todavía no hay platos. Toque Agregar en el menú.</p>
+            <div class="order__total"><span data-i18n="total">Total</span><span data-order-total>$0.00</span></div>
           </div>
           <div class="field"><label for="o-note" data-i18n="fNote">Nota (opcional)</label>
             <input id="o-note" name="nota" type="text" autocomplete="off"></div>
           <input type="hidden" name="text" value="">
-          <p class="order__error" data-order-error hidden role="alert" data-i18n="errEmpty">Agregue al menos un plato del menú.</p>
-          <button class="btn btn--primary btn--wa btn--lg order__send" type="submit"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaOrder">Pedir por WhatsApp</span></button>
-          <p class="t-small muted" data-i18n="orderNote">Se abre WhatsApp con su pedido listo para enviar.</p>
+          <p class="order__error" data-order-error hidden role="alert" data-i18n="errEmpty">Para pasar a recoger, agregue al menos un plato del menú.</p>
+          <button class="btn btn--primary btn--wa btn--lg order__send" type="submit"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-only="reserve" data-i18n="sendReserve">Enviar reserva por WhatsApp</span><span data-only="pickup" data-i18n="sendPickup">Enviar pedido por WhatsApp</span></button>
+          <p class="t-small muted" data-i18n="orderNote">Se abre WhatsApp con su mensaje listo; el restaurante le confirma por ahí.</p>
         </form>
         <figure class="frame-ticket span-6 start-7" data-moment="picture-develops"><img src="assets/img/photo-f106961743.webp" alt="Mojarra frita servida con aguacate, tomate y arroz" data-i18n-attr="alt:orderAlt" loading="lazy" data-source="stand-in" data-subject="mojarra frita"></figure>
       </div>
@@ -585,13 +620,13 @@
         <h2 id="close-h" data-i18n="closeH">Le esperamos en el Malecón</h2>
         <p class="lb-close__lead" data-i18n="closeLead">Mesas frente al mar, mariscos al momento y la cerveza bien fría. Abrimos de 3 p.&nbsp;m. a 2 a.&nbsp;m.; martes cerrado.</p>
         <div class="lb-hero__actions">
-          <a class="btn btn--primary btn--wa btn--lg" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaOrder">Pedir por WhatsApp</span></a>
-          <a class="btn btn--ghost btn--lg" href="https://www.openstreetmap.org/search?query=Malec%C3%B3n%20Puerto%20de%20La%20Libertad%20El%20Salvador" target="_blank" rel="noopener"><span data-i18n="seeArea">Ver la zona</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--primary btn--wa btn--lg" href="#pedido" data-mode-link="reserve"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaReserve">Reservar mesa</span></a>
+          <a class="btn btn--ghost btn--lg" href="#pedido" data-mode-link="pickup"><span data-i18n="ctaPickup">Pedir para recoger</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
         </div>
         <ul class="close-info">
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span><strong data-i18n="ciPlaceK">Dónde</strong><span data-i18n="ciPlaceV">Malecón del Puerto de La Libertad</span></span></li>
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg><span><strong data-i18n="ciHoursK">Horario</strong><span data-i18n="ciHoursV">Lun y mié a dom, 3 p.&nbsp;m. a 2 a.&nbsp;m.</span></span></li>
-          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mug"/></svg><span><strong data-i18n="ciGoK">Para llevar</strong><span data-i18n="ciGoV">Pedidos por WhatsApp</span></span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span><strong data-i18n="ciGoK">Reservas y pedidos</strong><span data-i18n="ciGoV">Por WhatsApp, con la hora que usted elija</span></span></li>
         </ul>
       </div>
     </div>
@@ -606,7 +641,7 @@
 </footer>
 
 <nav class="actionbar" aria-label="Acciones rápidas">
-  <a class="btn btn--primary btn--wa" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaOrder">Pedir por WhatsApp</span><span class="order-count" data-order-count hidden>0</span></a>
+  <a class="btn btn--primary btn--wa" href="#pedido"><svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ctaNav">Reservar o pedir</span><span class="order-count" data-order-count hidden>0</span></a>
 </nav>
 
 <script type="module" src="assets/system.js"></script>

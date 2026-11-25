@@ -27,7 +27,11 @@
 
   const EN = {
     skip: 'Skip to content', navMain: 'Main', navToggle: 'Menu', navMenu: 'Menu', navCarta: 'Full menu', navRev: 'Guests', navVisit: 'Visit',
-    ctaOrder: 'Order on WhatsApp', seeMenu: 'See the menu', logoAlt: 'Restaurante La Bolera logo',
+    ctaOrder: 'Order on WhatsApp', ctaNav: 'Book or order', ctaReserve: 'Book a table', ctaPickup: 'Order for pickup',
+    demoNote: 'Sample prices and photos for this preview; they will be replaced with the restaurant\'s real menu.',
+    modeGroup: 'Request type', modeReserve: 'Book a table', modePickup: 'Pickup', fPeople: 'Guests', fDate: 'Day', fTimeReserve: 'Arrival time', fTimePickup: 'Pickup time',
+    timeHint: '3:00 p.m. to 2:00 a.m.', errPeople: 'Write how many people are coming.', errDate: 'Choose the day; we are closed on Tuesdays.', errTime: 'Choose a time between 3:00 p.m. and 2:00 a.m.',
+    cartReserve: 'Dishes to have ready (optional)', cartPickup: 'Your order', sendReserve: 'Send booking on WhatsApp', sendPickup: 'Send order on WhatsApp', seeMenu: 'See the menu', logoAlt: 'Restaurante La Bolera logo',
     heroH1: 'Seafood by the sea on the', heroH2: 'La Libertad Malecón',
     heroLead: 'Huge ceviches, calamari and micheladas made to order, with the night view of the port.',
     factRating: '5.0 rating', factHours: '3 p.m. to 2 a.m.', factPlace: 'Puerto de La Libertad',
@@ -51,13 +55,13 @@
     revText: 'They come back for the night view from the Malecón, food made to order, the <strong>huge ceviches</strong> and the calamari.',
     rv1: 'The night view from the Malecón', rv2: 'Food made to order', rv3: 'The huge ceviches', rv4: 'The calamari',
     badgeTxt: 'RESTAURANT ✦ LA BOLERA ✦ LA LIBERTAD MALECÓN ✦',
-    orderOrn: 'Takeaway or at the table', orderH: 'Your order on WhatsApp', orderSide: 'Add dishes from the menu; we confirm on WhatsApp.',
+    orderOrn: 'Bookings and pickup orders', orderH: 'Book a table or order for pickup', orderSide: 'Choose the time and we confirm on WhatsApp.',
     orderAlt: 'Fried tilapia served with avocado, tomato and rice',
     orderEmpty: 'No dishes yet. Tap Add on the menu.', total: 'Total',
-    fName: 'Name', errName: 'Write the name for the order.', fMode: 'How you want it', modeHere: 'To eat here', modeGo: 'To take away', fNote: 'Note (optional)',
-    errEmpty: 'Add at least one dish from the menu.', orderNote: 'WhatsApp opens with your order ready to send.',
+    fName: 'Name', errName: 'Write the name for the booking or order.', fNote: 'Note (optional)',
+    errEmpty: 'For pickup, add at least one dish from the menu.', orderNote: 'WhatsApp opens with your message ready; the restaurant confirms there.',
     closeH: 'See you on the Malecón', closeLead: 'Tables by the sea, seafood made to order and ice-cold beer. Open 3 p.m. to 2 a.m.; closed Tuesdays.',
-    ciPlaceK: 'Where', ciPlaceV: 'Malecón, Puerto de La Libertad', ciHoursK: 'Hours', ciHoursV: 'Mon and Wed to Sun, 3 p.m. to 2 a.m.', ciGoK: 'Takeaway', ciGoV: 'Orders on WhatsApp',
+    ciPlaceK: 'Where', ciPlaceV: 'Malecón, Puerto de La Libertad', ciHoursK: 'Hours', ciHoursV: 'Mon and Wed to Sun, 3 p.m. to 2 a.m.', ciGoK: 'Bookings and orders', ciGoV: 'On WhatsApp, at the time you choose',
     credits: 'Photographs via Wikimedia Commons',
     qtyLess: 'One less', qtyMore: 'One more', today: 'Today',
   };
@@ -176,24 +180,58 @@
   });
 
   const form = document.getElementById('order-form');
+  const setMode = (m) => { if (!form) return; form.dataset.mode = m; form.querySelector(`input[name="tipo"][value="${m}"]`).checked = true; errEmpty.hidden = true; };
+  form?.addEventListener('change', (e) => { if (e.target.name === 'tipo') setMode(e.target.value); });
+  document.querySelectorAll('[data-mode-link]').forEach(a => a.addEventListener('click', () => setMode(a.dataset.modeLink)));
+  // día por defecto: hoy, o el siguiente día abierto (martes cerrado)
+  if (form) {
+    const sv = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/El_Salvador' }));
+    if (sv.getDay() === 2) sv.setDate(sv.getDate() + 1);
+    const iso = `${sv.getFullYear()}-${String(sv.getMonth() + 1).padStart(2, '0')}-${String(sv.getDate()).padStart(2, '0')}`;
+    form.elements.dia.value = iso; form.elements.dia.min = iso;
+  }
+  const fmtDate = (v) => { const [y, m, d] = v.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString(lang === 'en' ? 'en-US' : 'es-SV', { weekday: 'long', day: 'numeric', month: 'long' }); };
+  const fmtTime = (v) => { let [h, mi] = v.split(':').map(Number); const pm = h >= 12; const h12 = ((h + 11) % 12) + 1; return `${h12}:${String(mi).padStart(2, '0')} ${lang === 'en' ? (pm ? 'p.m.' : 'a.m.') : (pm ? 'p. m.' : 'a. m.')}`; };
+  function flag(input, errId, bad) {
+    const err = document.getElementById(errId);
+    err.hidden = !bad; if (bad) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+    return bad;
+  }
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = form.elements.nombre, nameErr = document.getElementById('o-name-err');
+    const mode = form.dataset.mode, el = form.elements;
     const ids = Object.keys(cart);
-    let bad = null;
-    if (!ids.length) { errEmpty.hidden = false; bad = 'cart'; }
-    if (!name.value.trim()) { nameErr.hidden = false; name.setAttribute('aria-invalid', 'true'); bad = name; }
-    else { nameErr.hidden = true; name.removeAttribute('aria-invalid'); }
-    if (bad) { if (bad === name) name.focus(); return; }
-    const L = lang === 'en'
-      ? { hi: 'Hello, La Bolera. I would like to order:', total: 'Total', name: 'Name', note: 'Note' }
-      : { hi: 'Hola, La Bolera. Quiero hacer este pedido:', total: 'Total', name: 'Nombre', note: 'Nota' };
+    const [hh, mm] = (el.hora.value || '').split(':').map(Number);
+    const mins = hh * 60 + mm;
+    const dayBad = !el.dia.value || new Date(el.dia.value + 'T12:00').getDay() === 2;
+    const fails = [
+      flag(el.nombre, 'o-name-err', !el.nombre.value.trim()) && el.nombre,
+      mode === 'reserve' && flag(el.personas, 'o-people-err', !(Number(el.personas.value) >= 1)) && el.personas,
+      flag(el.dia, 'o-date-err', dayBad) && el.dia,
+      flag(el.hora, 'o-time-err', !el.hora.value || !(mins >= 15 * 60 || mins <= 2 * 60)) && el.hora,
+    ].filter(Boolean);
+    if (mode === 'reserve') flag(el.personas, 'o-people-err', !(Number(el.personas.value) >= 1)); else flag(el.personas, 'o-people-err', false);
+    const cartBad = mode === 'pickup' && !ids.length;
+    errEmpty.hidden = !cartBad;
+    if (fails.length) { fails[0].focus(); return; }
+    if (cartBad) { document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); return; }
+    const en = lang === 'en';
     let total = 0;
-    const lines = ids.map(id => { const it = MENU[id], q = cart[id]; total += it.p * q; return `${q} x ${it[lang]} (${money(it.p * q)})`; });
-    const mode = form.elements.modo, note = form.elements.nota.value.trim();
-    const msg = [L.hi, ...lines, `${L.total}: ${money(total)}`, `${L.name}: ${name.value.trim()}`, mode.options[mode.selectedIndex].text]
-      .concat(note ? [`${L.note}: ${note}`] : []).join('\n');
-    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    const lines = ids.map(id => { const it = MENU[id], q = cart[id]; total += it.p * q; return `• ${q} x ${it[lang]} (${money(it.p * q)})`; });
+    const note = el.nota.value.trim();
+    const msg = [];
+    if (mode === 'reserve') {
+      msg.push(en ? 'Hello, La Bolera. I would like to book a table:' : 'Hola, La Bolera. Quiero reservar una mesa:');
+      msg.push(`${en ? 'Name' : 'Nombre'}: ${el.nombre.value.trim()}`, `${en ? 'Guests' : 'Personas'}: ${el.personas.value}`,
+        `${en ? 'Day' : 'Día'}: ${fmtDate(el.dia.value)}`, `${en ? 'Arrival time' : 'Hora de llegada'}: ${fmtTime(el.hora.value)}`);
+      if (lines.length) msg.push(en ? 'Dishes to have ready:' : 'Platos para tener listos:', ...lines, `Total: ${money(total)}`);
+    } else {
+      msg.push(en ? 'Hello, La Bolera. I would like to order for pickup:' : 'Hola, La Bolera. Quiero hacer un pedido para pasar a recoger:');
+      msg.push(...lines, `Total: ${money(total)}`, `${en ? 'Name' : 'Nombre'}: ${el.nombre.value.trim()}`,
+        `${en ? 'Day' : 'Día'}: ${fmtDate(el.dia.value)}`, `${en ? 'Pickup time' : 'Hora para recoger'}: ${fmtTime(el.hora.value)}`);
+    }
+    if (note) msg.push(`${en ? 'Note' : 'Nota'}: ${note}`);
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg.join('\n'))}`, '_blank', 'noopener');
   });
 
   /* ---------- movimiento: parallax por capas y giros ligados al scroll (solo gráficos y fotos, nunca texto) ---------- */
