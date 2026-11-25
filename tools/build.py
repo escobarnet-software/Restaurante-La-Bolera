@@ -126,6 +126,7 @@ html = f'''<!doctype html>
       <div class="nav__item"><a class="nav__link" href="#carta" data-i18n="navCarta">Carta</a></div>
       <div class="nav__item"><a class="nav__link" href="#clientes" data-i18n="navRev">Clientes</a></div>
       <div class="nav__item"><a class="nav__link" href="#visita" data-i18n="navVisit">Visita</a></div>
+      <div class="nav__item"><a class="nav__link" href="#llegar" data-i18n="navRoute">Llegar</a></div>
     </nav>
     <div class="nav__actions">
       <div class="lang" role="group" aria-label="Idioma / Language">
@@ -187,13 +188,62 @@ html = f'''<!doctype html>
           {HOURS}
           <div class="visit-card__foot">
             <address class="visit-card__addr"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span><span data-i18n="addr1">Malecón del Puerto</span><br>La Libertad, El Salvador</span></address>
-            <a class="link" href="{MAP}" target="_blank" rel="noopener" data-i18n="seeArea">Ver la zona</a>
+            <a class="link" href="#llegar" data-i18n="howGet">Cómo llegar</a>
           </div>
         </div>
         <figure class="frame-offset span-6" data-reveal>
           <div class="frame-offset__img">{img('f22459896', 'Palmera y faroles en el paseo del Malecón de La Libertad al anochecer', 'visitAlt', 'Malecón de La Libertad', sizes='(max-width: 1023px) 100vw, 560px', cls='')}</div>
           <img class="frame-offset__badge" src="assets/brand/logo-200.webp" alt="" width="200" height="200" data-spin>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section lb-route" id="llegar" aria-labelledby="llegar-h">
+    <div class="wrap grid grid--top lb-route__grid">
+      <div class="span-6 lb-route__text">
+        <div class="lb-head" data-reveal>
+          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="routeOrn">Cómo llegar</span></p>
+          <h2 id="llegar-h" data-i18n="routeH">Llegue directo al Malecón</h2>
+          <p class="lb-route__lead" data-i18n="routeLead">Estamos sobre el Malecón del Puerto de La Libertad, a pasos del muelle. Elija su app y le lleva hasta la puerta.</p>
+        </div>
+        <div class="apps">
+          <a class="app" href="https://waze.com/ul?ll=13.4836833%2C-89.3243403&navigate=yes&zoom=17" target="_blank" rel="noopener" data-reveal style="--i: 0"><span class="app__tile app__tile--waze"><img src="assets/icons/waze.svg" alt="" width="30" height="30"></span><span class="app__txt"><strong>Waze</strong><span data-i18n="appWaze">Iniciar la ruta</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Bolera%20Puerto%20de%20La%20Libertad&query_place_id=ChIJK3kns5DTfI8Rw7G5xuIOPBw" target="_blank" rel="noopener" data-reveal style="--i: 1"><span class="app__tile"><img src="assets/icons/googlemaps.svg" alt="" width="22" height="30"></span><span class="app__txt"><strong>Google Maps</strong><span data-i18n="appGoogle">Ver en el mapa</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://maps.apple.com/?q=Restaurante%20La%20Bolera&ll=13.4836833,-89.3243403" target="_blank" rel="noopener" data-reveal style="--i: 2"><span class="app__tile"><img src="assets/icons/apple.svg" alt="" width="25" height="30"></span><span class="app__txt"><strong>Apple Maps</strong><span data-i18n="appApple">Para iPhone</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=13.4836833&dropoff%5Blongitude%5D=-89.3243403&dropoff%5Bnickname%5D=Restaurante%20La%20Bolera" target="_blank" rel="noopener" data-reveal style="--i: 3"><span class="app__tile app__tile--uber"><img src="assets/icons/uber.svg" alt="" width="40" height="14"></span><span class="app__txt"><strong>Uber</strong><span data-i18n="appUber">Pedir un viaje hasta aquí</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <p class="lb-route__tip" data-reveal><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg><span data-i18n="routeTip">Desde San Salvador son unos 35 km por la carretera al Puerto de La Libertad.</span></p>
+      </div>
+      <div class="span-6 start-7">
+        <div class="map-art" data-route aria-hidden="true">
+          <svg class="map-art__svg" viewBox="0 0 560 560">
+            <defs><clipPath id="map-clip"><rect width="560" height="560" rx="28"/></clipPath></defs>
+            <g clip-path="url(#map-clip)">
+              <rect width="560" height="560" fill="#14100c"/>
+              <g class="map-art__grid" stroke="rgba(220,166,75,.07)" stroke-width="1"><path d="M40 0V560"/><path d="M80 0V560"/><path d="M120 0V560"/><path d="M160 0V560"/><path d="M200 0V560"/><path d="M240 0V560"/><path d="M280 0V560"/><path d="M320 0V560"/><path d="M360 0V560"/><path d="M400 0V560"/><path d="M440 0V560"/><path d="M480 0V560"/><path d="M520 0V560"/><path d="M0 40H560"/><path d="M0 80H560"/><path d="M0 120H560"/><path d="M0 160H560"/><path d="M0 200H560"/><path d="M0 240H560"/><path d="M0 280H560"/><path d="M0 320H560"/><path d="M0 360H560"/><path d="M0 400H560"/><path d="M0 440H560"/><path d="M0 480H560"/><path d="M0 520H560"/></g>
+              <path class="map-art__road" d="M40 40C120 90 150 150 190 210S260 300 300 330" fill="none" stroke="rgba(243,234,216,.12)" stroke-width="14" stroke-linecap="round"/>
+              <g class="map-art__sea" data-sea>
+                <path d="M-20 360C80 330 180 400 290 372S470 330 580 352V600H-20z" fill="#0d1a24"/>
+                <path d="M-20 392c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.35)" stroke-width="2"/>
+                <path d="M-20 440c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.22)" stroke-width="2"/>
+                <path d="M-20 490c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.14)" stroke-width="2"/>
+              </g>
+              <path d="M-20 360C80 330 180 400 290 372S470 330 580 352" fill="none" stroke="#dca64b" stroke-width="3"/>
+              <rect class="map-art__pier" x="330" y="352" width="16" height="120" rx="3" fill="#2a2016" stroke="#dca64b" stroke-width="1.5"/>
+              <path class="map-art__route" d="M40 40C120 90 150 150 190 210S260 300 300 330" fill="none" stroke="#dca64b" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 12" pathLength="100"/>
+              <circle cx="40" cy="40" r="7" fill="#f3ead8"/>
+              <text x="58" y="45" class="map-art__label" data-i18n="mapFrom">DESDE SAN SALVADOR</text>
+              <text x="362" y="420" class="map-art__label" data-i18n="mapPier">MUELLE</text>
+              <text x="190" y="352" class="map-art__label" data-i18n="mapMalecon">MALECÓN</text>
+              <text x="200" y="530" class="map-art__label map-art__label--sea" data-i18n="mapSea">OCÉANO PACÍFICO</text>
+            </g>
+          </svg>
+          <div class="map-pin" data-pin>
+            <span class="map-pin__pulse"></span><span class="map-pin__pulse map-pin__pulse--2"></span>
+            <span class="map-pin__disc"><img src="assets/brand/logo-200.webp" alt="" width="200" height="200"></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -317,7 +367,7 @@ html = f'''<!doctype html>
     <div class="closing__links">
       <div class="lb-legal">
         <span>&copy; 2026 Restaurante La Bolera</span>
-        <nav class="lb-legal__nav" aria-label="Pie de página"><a href="#menu" data-i18n="navMenu">Menú</a><a href="#carta" data-i18n="navCarta">Carta</a><a href="#clientes" data-i18n="navRev">Clientes</a><a href="#visita" data-i18n="navVisit">Visita</a></nav>
+        <nav class="lb-legal__nav" aria-label="Pie de página"><a href="#menu" data-i18n="navMenu">Menú</a><a href="#carta" data-i18n="navCarta">Carta</a><a href="#clientes" data-i18n="navRev">Clientes</a><a href="#visita" data-i18n="navVisit">Visita</a><a href="#llegar" data-i18n="navRoute">Llegar</a></nav>
         <a class="lb-legal__credits" href="credits.html" data-i18n="credits">Fotografías vía Wikimedia Commons</a>
       </div>
     </div>

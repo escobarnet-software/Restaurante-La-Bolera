@@ -317,6 +317,48 @@
   .lb-legal__nav a:hover, .lb-legal__credits:hover { color: var(--gold); }
   @media (max-width: 1023px) { .lb-close__cta { grid-template-columns: minmax(0, 1fr); gap: 32px; } .lb-close__logo { width: min(70%, 300px); } .close-info { grid-template-columns: minmax(0, 1fr); } .lb-close .closing__links { margin-top: 48px; } }
 
+  /* ---------- cómo llegar ---------- */
+  .lb-route { background: radial-gradient(50% 60% at 80% 50%, rgba(220, 166, 75, .1), transparent 70%), var(--p-bg); }
+  .lb-route__grid { align-items: center; }
+  .lb-route__lead { margin: 18px 0 0; max-width: 46ch; color: var(--p-muted); font-size: 18px; line-height: 1.6; }
+  .lb-route .lb-head { margin-bottom: 32px; }
+  .apps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .app { display: flex; align-items: center; gap: 14px; min-height: 84px; padding: 14px 18px 14px 14px; border-radius: 20px; border: 1px solid rgba(220, 166, 75, .22);
+    background: linear-gradient(160deg, #1b150f, #110d09); color: var(--cream); text-decoration: none; transition: transform 350ms cubic-bezier(.22, 1, .36, 1), border-color 250ms, box-shadow 350ms; }
+  .app:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 22px 40px -24px rgba(220, 166, 75, .5); }
+  .app:active { transform: scale(.98); }
+  .app__tile { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: #fff; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .7); transition: transform 350ms cubic-bezier(.22, 1, .36, 1); }
+  .app:hover .app__tile { transform: rotate(-6deg) scale(1.06); }
+  .app__tile img { display: block; }
+  .app__tile--waze { background: #33ccff; } .app__tile--waze img { filter: brightness(0) invert(1); }
+  .app__txt { display: grid; gap: 2px; min-width: 0; }
+  .app__txt strong { font: 400 20px/1.15 var(--font-display); color: var(--cream); }
+  .app__txt span { font-size: 14px; color: var(--p-muted); }
+  .app__arrow { width: 16px; height: 16px; margin-left: auto; color: var(--gold); transition: transform 250ms; }
+  .app:hover .app__arrow { transform: translateX(4px); }
+  .lb-route__tip { display: flex; align-items: center; gap: 10px; margin: 24px 0 0; color: var(--p-muted); font-size: 15px; }
+  .lb-route__tip .ic { color: var(--gold); font-size: 18px; }
+  .map-art { position: relative; width: min(100%, 560px); margin-left: auto; aspect-ratio: 1; border-radius: 28px; box-shadow: 0 0 0 1px rgba(220, 166, 75, .35), 0 40px 80px -40px rgba(0, 0, 0, .9); transform: translate3d(0, var(--py, 0px), 0); }
+  .map-art__svg { display: block; width: 100%; height: 100%; }
+  .map-art__sea { transform: translate3d(var(--sx, 0px), 0, 0); }
+  .map-art__label { font: 400 13px var(--font-caps); letter-spacing: 3px; fill: rgba(243, 234, 216, .7); }
+  .map-art__label--sea { fill: rgba(220, 166, 75, .6); letter-spacing: 6px; }
+  .map-art__route { stroke-dasharray: 2 4; }
+  .lb-js .map-art .map-art__route { stroke-dashoffset: 100; transition: stroke-dashoffset 2200ms cubic-bezier(.65, 0, .35, 1) 200ms; }
+  .lb-js .map-art.is-in .map-art__route { stroke-dashoffset: 0; animation: march 1.6s linear 2.4s infinite; }
+  @keyframes march { to { stroke-dashoffset: -12; } }
+  .map-pin { position: absolute; left: 53.6%; top: 58.9%; width: 18%; aspect-ratio: 1; transform: translate(-50%, -100%); }
+  .map-pin__disc { position: absolute; inset: 0; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #0b0907; border: 2px solid var(--gold); display: grid; place-items: center; box-shadow: 0 16px 30px -10px #000; animation: drop 900ms cubic-bezier(.34, 1.4, .64, 1) both; animation-play-state: paused; }
+  .map-pin__disc img { width: 86%; height: auto; transform: rotate(45deg); }
+  .map-art.is-in .map-pin__disc { animation-play-state: running; }
+  .map-pin__pulse { position: absolute; left: 0; bottom: -8%; width: 30%; aspect-ratio: 1; margin-left: -15%; border-radius: 50%; border: 2px solid var(--gold); opacity: 0; animation: ping 2.4s ease-out 1.2s infinite; }
+  .map-pin__pulse--2 { animation-delay: 2.4s; }
+  @keyframes drop { from { opacity: 0; transform: rotate(-45deg) translate(-40px, -40px); } }
+  @keyframes ping { 0% { opacity: .8; transform: scale(.4); } 100% { opacity: 0; transform: scale(3.2); } }
+  .map-pin__pulse { left: 50%; bottom: -14%; }
+  @media (max-width: 1023px) { .map-art { margin: 40px auto 0; } }
+  @media (max-width: 639px) { .apps { grid-template-columns: minmax(0, 1fr); } .app { min-height: 76px; } }
+
   /* ---------- aparición al hacer scroll (una vez) ---------- */
   .lb-js [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 800ms cubic-bezier(.22, 1, .36, 1), transform 800ms cubic-bezier(.22, 1, .36, 1); transition-delay: calc(var(--i, 0) * 90ms); }
   .lb-js [data-reveal].is-in { opacity: 1; transform: none; }
@@ -326,7 +368,8 @@
     *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; }
     .lb-js [data-reveal] { opacity: 1; transform: none; }
     .marquee__track { animation: none; }
-    .orb, .float-ic, .seal, .seal__text, .lb-close__logo, .frame-offset__img img, .frame-offset__badge { transform: none !important; }
+    .lb-js .map-art .map-art__route { stroke-dashoffset: 0; }
+    .orb, .float-ic, .seal, .seal__text, .map-art, .map-art__sea, .lb-close__logo, .frame-offset__img img, .frame-offset__badge { transform: none !important; }
   }
 
 </style>
@@ -358,6 +401,7 @@
       <div class="nav__item"><a class="nav__link" href="#carta" data-i18n="navCarta">Carta</a></div>
       <div class="nav__item"><a class="nav__link" href="#clientes" data-i18n="navRev">Clientes</a></div>
       <div class="nav__item"><a class="nav__link" href="#visita" data-i18n="navVisit">Visita</a></div>
+      <div class="nav__item"><a class="nav__link" href="#llegar" data-i18n="navRoute">Llegar</a></div>
     </nav>
     <div class="nav__actions">
       <div class="lang" role="group" aria-label="Idioma / Language">
@@ -427,13 +471,62 @@
             </dl>
           <div class="visit-card__foot">
             <address class="visit-card__addr"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span><span data-i18n="addr1">Malecón del Puerto</span><br>La Libertad, El Salvador</span></address>
-            <a class="link" href="https://www.openstreetmap.org/search?query=Malec%C3%B3n%20Puerto%20de%20La%20Libertad%20El%20Salvador" target="_blank" rel="noopener" data-i18n="seeArea">Ver la zona</a>
+            <a class="link" href="#llegar" data-i18n="howGet">Cómo llegar</a>
           </div>
         </div>
         <figure class="frame-offset span-6" data-reveal>
           <div class="frame-offset__img"><img src="assets/img/photo-f22459896-960.webp" srcset="assets/img/photo-f22459896-500.webp 500w, assets/img/photo-f22459896-960.webp 960w" sizes="(max-width: 1023px) 100vw, 560px" alt="Palmera y faroles en el paseo del Malecón de La Libertad al anochecer" data-i18n-attr="alt:visitAlt" loading="lazy" data-source="stand-in" data-subject="Malecón de La Libertad"></div>
           <img class="frame-offset__badge" src="assets/brand/logo-200.webp" alt="" width="200" height="200" data-spin>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section lb-route" id="llegar" aria-labelledby="llegar-h">
+    <div class="wrap grid grid--top lb-route__grid">
+      <div class="span-6 lb-route__text">
+        <div class="lb-head" data-reveal>
+          <p class="orn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="routeOrn">Cómo llegar</span></p>
+          <h2 id="llegar-h" data-i18n="routeH">Llegue directo al Malecón</h2>
+          <p class="lb-route__lead" data-i18n="routeLead">Estamos sobre el Malecón del Puerto de La Libertad, a pasos del muelle. Elija su app y le lleva hasta la puerta.</p>
+        </div>
+        <div class="apps">
+          <a class="app" href="https://waze.com/ul?ll=13.4836833%2C-89.3243403&navigate=yes&zoom=17" target="_blank" rel="noopener" data-reveal style="--i: 0"><span class="app__tile app__tile--waze"><img src="assets/icons/waze.svg" alt="" width="30" height="30"></span><span class="app__txt"><strong>Waze</strong><span data-i18n="appWaze">Iniciar la ruta</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Bolera%20Puerto%20de%20La%20Libertad&query_place_id=ChIJK3kns5DTfI8Rw7G5xuIOPBw" target="_blank" rel="noopener" data-reveal style="--i: 1"><span class="app__tile"><img src="assets/icons/googlemaps.svg" alt="" width="22" height="30"></span><span class="app__txt"><strong>Google Maps</strong><span data-i18n="appGoogle">Ver en el mapa</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://maps.apple.com/?q=Restaurante%20La%20Bolera&ll=13.4836833,-89.3243403" target="_blank" rel="noopener" data-reveal style="--i: 2"><span class="app__tile"><img src="assets/icons/apple.svg" alt="" width="25" height="30"></span><span class="app__txt"><strong>Apple Maps</strong><span data-i18n="appApple">Para iPhone</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="app" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=13.4836833&dropoff%5Blongitude%5D=-89.3243403&dropoff%5Bnickname%5D=Restaurante%20La%20Bolera" target="_blank" rel="noopener" data-reveal style="--i: 3"><span class="app__tile app__tile--uber"><img src="assets/icons/uber.svg" alt="" width="40" height="14"></span><span class="app__txt"><strong>Uber</strong><span data-i18n="appUber">Pedir un viaje hasta aquí</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <p class="lb-route__tip" data-reveal><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg><span data-i18n="routeTip">Desde San Salvador son unos 35 km por la carretera al Puerto de La Libertad.</span></p>
+      </div>
+      <div class="span-6 start-7">
+        <div class="map-art" data-route aria-hidden="true">
+          <svg class="map-art__svg" viewBox="0 0 560 560">
+            <defs><clipPath id="map-clip"><rect width="560" height="560" rx="28"/></clipPath></defs>
+            <g clip-path="url(#map-clip)">
+              <rect width="560" height="560" fill="#14100c"/>
+              <g class="map-art__grid" stroke="rgba(220,166,75,.07)" stroke-width="1"><path d="M40 0V560"/><path d="M80 0V560"/><path d="M120 0V560"/><path d="M160 0V560"/><path d="M200 0V560"/><path d="M240 0V560"/><path d="M280 0V560"/><path d="M320 0V560"/><path d="M360 0V560"/><path d="M400 0V560"/><path d="M440 0V560"/><path d="M480 0V560"/><path d="M520 0V560"/><path d="M0 40H560"/><path d="M0 80H560"/><path d="M0 120H560"/><path d="M0 160H560"/><path d="M0 200H560"/><path d="M0 240H560"/><path d="M0 280H560"/><path d="M0 320H560"/><path d="M0 360H560"/><path d="M0 400H560"/><path d="M0 440H560"/><path d="M0 480H560"/><path d="M0 520H560"/></g>
+              <path class="map-art__road" d="M40 40C120 90 150 150 190 210S260 300 300 330" fill="none" stroke="rgba(243,234,216,.12)" stroke-width="14" stroke-linecap="round"/>
+              <g class="map-art__sea" data-sea>
+                <path d="M-20 360C80 330 180 400 290 372S470 330 580 352V600H-20z" fill="#0d1a24"/>
+                <path d="M-20 392c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.35)" stroke-width="2"/>
+                <path d="M-20 440c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.22)" stroke-width="2"/>
+                <path d="M-20 490c40 0 40-10 80-10s40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10 40 10 80 10 40-10 80-10" fill="none" stroke="rgba(220,166,75,.14)" stroke-width="2"/>
+              </g>
+              <path d="M-20 360C80 330 180 400 290 372S470 330 580 352" fill="none" stroke="#dca64b" stroke-width="3"/>
+              <rect class="map-art__pier" x="330" y="352" width="16" height="120" rx="3" fill="#2a2016" stroke="#dca64b" stroke-width="1.5"/>
+              <path class="map-art__route" d="M40 40C120 90 150 150 190 210S260 300 300 330" fill="none" stroke="#dca64b" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 12" pathLength="100"/>
+              <circle cx="40" cy="40" r="7" fill="#f3ead8"/>
+              <text x="58" y="45" class="map-art__label" data-i18n="mapFrom">DESDE SAN SALVADOR</text>
+              <text x="362" y="420" class="map-art__label" data-i18n="mapPier">MUELLE</text>
+              <text x="190" y="352" class="map-art__label" data-i18n="mapMalecon">MALECÓN</text>
+              <text x="200" y="530" class="map-art__label map-art__label--sea" data-i18n="mapSea">OCÉANO PACÍFICO</text>
+            </g>
+          </svg>
+          <div class="map-pin" data-pin>
+            <span class="map-pin__pulse"></span><span class="map-pin__pulse map-pin__pulse--2"></span>
+            <span class="map-pin__disc"><img src="assets/brand/logo-200.webp" alt="" width="200" height="200"></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -633,7 +726,7 @@
     <div class="closing__links">
       <div class="lb-legal">
         <span>&copy; 2026 Restaurante La Bolera</span>
-        <nav class="lb-legal__nav" aria-label="Pie de página"><a href="#menu" data-i18n="navMenu">Menú</a><a href="#carta" data-i18n="navCarta">Carta</a><a href="#clientes" data-i18n="navRev">Clientes</a><a href="#visita" data-i18n="navVisit">Visita</a></nav>
+        <nav class="lb-legal__nav" aria-label="Pie de página"><a href="#menu" data-i18n="navMenu">Menú</a><a href="#carta" data-i18n="navCarta">Carta</a><a href="#clientes" data-i18n="navRev">Clientes</a><a href="#visita" data-i18n="navVisit">Visita</a><a href="#llegar" data-i18n="navRoute">Llegar</a></nav>
         <a class="lb-legal__credits" href="credits.html" data-i18n="credits">Fotografías vía Wikimedia Commons</a>
       </div>
     </div>

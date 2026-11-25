@@ -243,6 +243,8 @@
   const badge = document.querySelector('[data-badge]');
   const badgeText = badge?.querySelector('.seal__text');
   const closeLogo = document.querySelector('[data-float]');
+  const mapArt = document.querySelector('[data-route]');
+  const mapSea = document.querySelector('[data-sea]');
   const progress = (el) => { const r = el.getBoundingClientRect(), vh = innerHeight; return { r, p: (vh - r.top) / (vh + r.height) }; };   // 0 entra, 1 sale
   let ticking = false;
   function frame() {
@@ -256,6 +258,7 @@
     if (frameImg) { const { r, p } = progress(frameImg.parentElement); if (r.bottom > 0 && r.top < vh) frameImg.style.setProperty('--py', ((p - .5) * -60).toFixed(1) + 'px'); }
     for (const el of spins) { const { r, p } = progress(el); if (r.bottom > 0 && r.top < vh) el.style.setProperty('--rot', ((p - .5) * 120).toFixed(1) + 'deg'); }
     if (badge) { const { r, p } = progress(badge); if (r.bottom > 0 && r.top < vh) { badgeText.style.setProperty('--rot', (p * 200).toFixed(1) + 'deg'); badge.style.setProperty('--py', ((p - .5) * -50).toFixed(1) + 'px'); } }
+    if (mapArt) { const { r, p } = progress(mapArt); if (r.bottom > 0 && r.top < vh) { mapArt.style.setProperty('--py', ((p - .5) * -36).toFixed(1) + 'px'); mapSea.style.setProperty('--sx', ((p - .5) * -60).toFixed(1) + 'px'); } }
     if (closeLogo) { const { r, p } = progress(closeLogo); if (r.bottom > 0 && r.top < vh) { closeLogo.style.setProperty('--py', ((p - .5) * -40).toFixed(1) + 'px'); closeLogo.style.setProperty('--rot', ((p - .5) * -10).toFixed(1) + 'deg'); } }
   }
   const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
@@ -263,7 +266,7 @@
   addEventListener('resize', req);
 
   /* apariciones: cada bloque entra una vez, suave; sin script o con movimiento reducido todo se ve desde el inicio */
-  const reveal = [...document.querySelectorAll('[data-reveal]')];
+  const reveal = [...document.querySelectorAll('[data-reveal], [data-route]')];
   if (reduce.matches || !('IntersectionObserver' in window)) reveal.forEach(el => el.classList.add('is-in'));
   else {
     const io = new IntersectionObserver((entries) => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
