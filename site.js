@@ -1,5 +1,5 @@
-/* La Bolera: idioma (ES/EN), lista de pedido a WhatsApp y parallax de las fotos.
-   El número de WhatsApp se cambia aquí (formato internacional, sin + ni espacios). */
+/* La Bolera: idioma (ES/EN), horario de hoy, lista de pedido a WhatsApp, parallax y apariciones.
+   El número de WhatsApp se cambia aquí (formato internacional, sin + ni espacios) y en el action del formulario. */
 (() => {
   const WHATSAPP = '50374756008';
 
@@ -26,39 +26,40 @@
   };
 
   const EN = {
-    skip: 'Skip to content', navMain: 'Main', navToggle: 'Menu', navMenu: 'Menu', navPlace: 'The place', navOrder: 'Order', navVisit: 'Visit',
-    navCev: 'Ceviches', navCevLine: 'From $7.25', navCoc: 'Cocktails', navCocLine: 'From $7.75', navFry: 'Fried and main plates', navFryLine: 'From $8.25',
-    ctaOrder: 'Order on WhatsApp',
-    heroOrn: 'Restaurant', heroH: 'Seafood on the La Libertad Malecón', heroLead: 'Ceviches and calamari made to order, 3 p.m. to 2 a.m. Closed Tuesdays.',
-    heroAlt: 'The La Libertad Malecón at night, its lights reflected in the sea',
-    visitH: 'Visit us on the Malecón', addr1: 'Malecón del Puerto', seeArea: 'See the area',
-    dMon: 'Monday', dTue: 'Tuesday', dWedSun: 'Wednesday to Sunday', closed: 'Closed',
-    rowOrderK: 'Takeaway', rowOrderV: 'Orders on WhatsApp', rowViewK: 'Tables', rowViewV: 'By the sea, next to the pier',
+    skip: 'Skip to content', navMain: 'Main', navToggle: 'Menu', navMenu: 'Menu', navCarta: 'Full menu', navRev: 'Guests', navVisit: 'Visit',
+    ctaOrder: 'Order on WhatsApp', seeMenu: 'See the menu', logoAlt: 'Restaurante La Bolera logo',
+    heroH1: 'Seafood by the sea on the', heroH2: 'La Libertad Malecón',
+    heroLead: 'Huge ceviches, calamari and micheladas made to order, with the night view of the port.',
+    factRating: '5.0 rating', factHours: '3 p.m. to 2 a.m.', factPlace: 'Puerto de La Libertad',
+    mq1: 'Ceviches', mq2: 'Shrimp cocktails', mq3: 'Calamari', mq4: 'Fried tilapia', mq5: 'Micheladas', mq6: 'Sea view',
+    visitOrn: 'Hours and location', visitH: 'Visit us on the Malecón', addr1: 'Malecón del Puerto', seeArea: 'See the area',
+    dMon: 'Monday', dTue: 'Tuesday', dWed: 'Wednesday', dThu: 'Thursday', dFri: 'Friday', dSat: 'Saturday', dSun: 'Sunday', closed: 'Closed',
     visitAlt: 'A palm tree and street lamps on the La Libertad Malecón at dusk',
-    menuH: 'Menu and prices', menuSide: 'Prices in US dollars. Every dish is made when you order it.',
+    menuOrn: 'House favourites', menuH: 'Menu and prices', menuSide: 'Prices in US dollars. Every dish is made when you order it.',
     iCevCam: 'Shrimp ceviche', dCevCam: 'Cured in lime, with fried plantain.', altCevCam: 'Shrimp ceviche in a glass, with fried plantain',
     iCocCam: 'Shrimp cocktail', dCocCam: 'With avocado and tostadas.', altCocCam: 'Shrimp cocktail in a tall glass, with avocado and tostadas',
     iCalam: 'Fried calamari', dCalam: 'With lime and hot sauce.', altCalam: 'Fried calamari with hot sauce and lime',
     iMoj: 'Fried tilapia', dMoj: 'With rice, salad and fries.', altMoj: 'Whole fried tilapia with rice, salad and fries',
     add: 'Add', added: 'Added',
-    cartaH: 'The full menu', gCev: 'Ceviches and cocktails', gMain: 'Main plates', gDrinks: 'Drinks',
+    cartaOrn: 'To share at the table', cartaH: 'The full menu',
+    gCev: 'Ceviches and cocktails', gMain: 'Main plates', gDrinks: 'Drinks',
+    altGCev: 'Fish ceviche with red onion, corn and sweet potato', altGMain: 'Seafood soup with shrimp and clams', altGDrinks: 'Tamarind michelada with lime and a chili rim',
     iCevPes: 'Fish ceviche', iCevMix: 'Mixed ceviche', iCevCon: 'Black clam ceviche', iCocCon: 'Black clam cocktail', iCamp: 'Mixed seafood cocktail',
     iPargo: 'Whole fried snapper', iAjillo: 'Garlic shrimp', iEmp: 'Breaded shrimp', iSopa: 'Seafood soup', iMarisc: 'Creamy seafood stew',
     iMich: 'Michelada', iBeer: 'Local beer', iLim: 'Lemonade', iCoco: 'Iced coconut', iSoda: 'Soft drink',
-    revH: 'What our guests say on Google Maps',
-    revText: 'The night view from the Malecón, food made to order, <strong>huge ceviches</strong> and the calamari.',
-    placeH: 'The Malecón, from afternoon to night', placeLink: 'See the full menu',
-    placeAlt1: 'People walking along the La Libertad Malecón by the sea', placeAlt2: 'Sunset over the Pacific on the coast of El Salvador',
-    orderH: 'Your order on WhatsApp', orderSide: 'Add dishes from the menu; we confirm on WhatsApp.',
+    revH: 'What our guests say', ratingTxt: '5.0 rating',
+    revText: 'They come back for the night view from the Malecón, food made to order, the <strong>huge ceviches</strong> and the calamari.',
+    rv1: 'The night view from the Malecón', rv2: 'Food made to order', rv3: 'The huge ceviches', rv4: 'The calamari',
+    badgeTxt: 'RESTAURANT ✦ LA BOLERA ✦ LA LIBERTAD MALECÓN ✦',
+    orderOrn: 'Takeaway or at the table', orderH: 'Your order on WhatsApp', orderSide: 'Add dishes from the menu; we confirm on WhatsApp.',
     orderAlt: 'Fried tilapia served with avocado, tomato and rice',
-    altGCev: 'Fish ceviche with red onion, corn and sweet potato', altGMain: 'Seafood soup with shrimp and clams', altGDrinks: 'Tamarind michelada with lime and a chili rim',
     orderEmpty: 'No dishes yet. Tap Add on the menu.', total: 'Total',
     fName: 'Name', errName: 'Write the name for the order.', fMode: 'How you want it', modeHere: 'To eat here', modeGo: 'To take away', fNote: 'Note (optional)',
     errEmpty: 'Add at least one dish from the menu.', orderNote: 'WhatsApp opens with your order ready to send.',
-    closeH: 'See you on the Malecón', closeLead: '3 p.m. to 2 a.m. Closed Tuesdays.',
-    footLede: 'Seafood restaurant on the Malecón at Puerto de La Libertad.', addrShort: 'Malecón, La Libertad', footHours: 'Opening hours', footRev: 'Reviews', footWa: 'WhatsApp',
+    closeH: 'See you on the Malecón', closeLead: 'Tables by the sea, seafood made to order and ice-cold beer. Open 3 p.m. to 2 a.m.; closed Tuesdays.',
+    ciPlaceK: 'Where', ciPlaceV: 'Malecón, Puerto de La Libertad', ciHoursK: 'Hours', ciHoursV: 'Mon and Wed to Sun, 3 p.m. to 2 a.m.', ciGoK: 'Takeaway', ciGoV: 'Orders on WhatsApp',
     credits: 'Photographs via Wikimedia Commons',
-    qtyLess: 'One less', qtyMore: 'One more',
+    qtyLess: 'One less', qtyMore: 'One more', today: 'Today',
   };
 
   const store = {
@@ -67,7 +68,7 @@
   };
 
   /* ---------- idioma ---------- */
-  const ES = {};
+  const ES = { added: 'Agregado', qtyLess: 'Uno menos', qtyMore: 'Uno más', today: 'Hoy' };
   let lang = store.get('lb-lang') === 'en' ? 'en' : 'es';
   const t = (k) => (lang === 'en' ? EN[k] : ES[k]) ?? ES[k] ?? EN[k] ?? k;
 
@@ -77,7 +78,6 @@
     document.querySelectorAll('[data-i18n-attr]').forEach(el => el.dataset.i18nAttr.split(';').forEach(pair => {
       const [attr, k] = pair.split(':'); if (!(k in ES)) ES[k] = el.getAttribute(attr) || '';
     }));
-    ES.added = 'Agregado'; ES.qtyLess = 'Uno menos'; ES.qtyMore = 'Uno más';
   }
 
   function applyLang(first) {
@@ -86,48 +86,45 @@
     document.querySelectorAll('[data-i18n-attr]').forEach(el => el.dataset.i18nAttr.split(';').forEach(pair => {
       const [attr, k] = pair.split(':'); el.setAttribute(attr, t(k));
     }));
-    // la frase de los clientes: el momento la parte en palabras; al cambiar de idioma se pone entera en tinta
-    if (!first) document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); el.closest('[data-moment]')?.classList.add('is-done'); el.querySelectorAll('*').forEach(c => c.classList.add('is-on')); });
-    document.querySelectorAll('[data-add]').forEach(b => {
-      const name = MENU[b.dataset.add][lang];
-      if (b.classList.contains('add-icon')) b.setAttribute('aria-label', (lang === 'en' ? 'Add ' : 'Agregar ') + name);
+    if (!first) document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      el.innerHTML = t(el.dataset.i18nHtml);
+      el.closest('[data-moment]')?.classList.add('is-done');
     });
-    const tg = document.querySelector('[data-lang-toggle]');
-    if (tg) {
-      tg.textContent = lang === 'en' ? 'ES' : 'EN';
-      tg.lang = lang === 'en' ? 'es' : 'en';
-      tg.setAttribute('aria-label', lang === 'en' ? 'Leer en español' : 'Read in English');
-    }
+    document.querySelectorAll('.add-icon[data-add]').forEach(b => b.setAttribute('aria-label', (lang === 'en' ? 'Add ' : 'Agregar ') + MENU[b.dataset.add][lang]));
+    document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     document.querySelector('.actionbar')?.setAttribute('aria-label', lang === 'en' ? 'Quick actions' : 'Acciones rápidas');
     render();
-    openLine();
+    hoursToday();
   }
 
-  /* ---------- abierto / cerrado (lunes y de miércoles a domingo, 15:00 a 2:00; martes cerrado) ---------- */
-  function openLine() {
-    const el = document.querySelector('[data-open-line]'); if (!el) return;
+  /* ---------- horario: hoy y abierto / cerrado (lunes y de miércoles a domingo, 15:00 a 2:00) ---------- */
+  function hoursToday() {
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/El_Salvador' }));
     const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
     const openDay = (x) => x !== 2;
-    let open = false, until = '2:00';
-    if (h >= 15 && openDay(d)) open = true;
-    else if (h < 2 && openDay((d + 6) % 7)) open = true;
+    const open = (h >= 15 && openDay(d)) || (h < 2 && openDay((d + 6) % 7));
+    const shiftDay = h < 2 ? (d + 6) % 7 : d;   // pasada la medianoche cuenta el turno de ayer
+    document.querySelectorAll('[data-hours] > div').forEach(row => {
+      const on = Number(row.dataset.day) === shiftDay;
+      row.classList.toggle('is-today', on);
+      const dt = row.querySelector('dt'); if (on) dt.dataset.today = t('today'); else delete dt.dataset.today;
+    });
+    const st = document.querySelector('[data-status]'); if (!st) return;
     let txt;
-    if (open) txt = lang === 'en' ? `Open now, until ${until}` : `Abierto ahora, hasta las ${until}`;
+    if (open) txt = lang === 'en' ? 'Open now · until 2 a.m.' : 'Abierto ahora · hasta las 2 a. m.';
     else {
-      const today = h < 15 && openDay(d);
-      const tomorrow = openDay((d + 1) % 7);
-      if (lang === 'en') txt = today ? 'Closed, opens today at 15:00' : tomorrow ? 'Closed, opens tomorrow at 15:00' : 'Closed, opens Wednesday at 15:00';
-      else txt = today ? 'Cerrado, abre hoy a las 15:00' : tomorrow ? 'Cerrado, abre mañana a las 15:00' : 'Cerrado, abre el miércoles a las 15:00';
+      const today = h < 15 && openDay(d), tomorrow = openDay((d + 1) % 7);
+      if (lang === 'en') txt = today ? 'Closed now · opens today at 3 p.m.' : tomorrow ? 'Closed now · opens tomorrow at 3 p.m.' : 'Closed now · opens Wednesday at 3 p.m.';
+      else txt = today ? 'Cerrado ahora · abre hoy a las 3 p. m.' : tomorrow ? 'Cerrado ahora · abre mañana a las 3 p. m.' : 'Cerrado ahora · abre el miércoles a las 3 p. m.';
     }
-    el.textContent = txt;
+    st.classList.toggle('is-open', open); st.classList.toggle('is-closed', !open);
+    st.querySelector('[data-status-text]').textContent = txt;
   }
 
   /* ---------- pedido ---------- */
   let cart = store.get('lb-cart') || {};
   for (const id of Object.keys(cart)) if (!MENU[id] || !(cart[id] > 0)) delete cart[id];
   const money = (n) => '$' + n.toFixed(2);
-
   const list = document.querySelector('[data-order-list]');
   const empty = document.querySelector('[data-order-empty]');
   const totalEl = document.querySelector('[data-order-total]');
@@ -141,7 +138,7 @@
     for (const id of ids) {
       const it = MENU[id], q = cart[id]; total += it.p * q; count += q;
       const li = document.createElement('li');
-      li.innerHTML = `<span class="order__name"></span><span class="order__qty"><button type="button" data-q="-1"></button><output></output><button type="button" data-q="1"></button></span><span class="order__line-total"></span>`;
+      li.innerHTML = '<span class="order__name"></span><span class="order__qty"><button type="button"></button><output></output><button type="button"></button></span><span class="order__line-total"></span>';
       li.querySelector('.order__name').textContent = it[lang];
       const [less, more] = li.querySelectorAll('button');
       less.textContent = '−'; more.textContent = '+';
@@ -164,7 +161,6 @@
     });
     if (ids.length && errEmpty) errEmpty.hidden = true;
   }
-
   function change(id, d) {
     cart[id] = (cart[id] || 0) + d;
     if (cart[id] <= 0) delete cart[id];
@@ -175,8 +171,8 @@
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-add]');
     if (b) change(b.dataset.add, 1);
-    const tg = e.target.closest('[data-lang-toggle]');
-    if (tg) { lang = lang === 'en' ? 'es' : 'en'; store.set('lb-lang', lang); applyLang(false); }
+    const lb = e.target.closest('[data-lang]');
+    if (lb && lb.dataset.lang !== lang) { lang = lb.dataset.lang; store.set('lb-lang', lang); applyLang(false); }
   });
 
   const form = document.getElementById('order-form');
@@ -185,7 +181,7 @@
     const name = form.elements.nombre, nameErr = document.getElementById('o-name-err');
     const ids = Object.keys(cart);
     let bad = null;
-    if (!ids.length) { errEmpty.hidden = false; bad = bad || document.querySelector('#menu'); }
+    if (!ids.length) { errEmpty.hidden = false; bad = 'cart'; }
     if (!name.value.trim()) { nameErr.hidden = false; name.setAttribute('aria-invalid', 'true'); bad = name; }
     else { nameErr.hidden = true; name.removeAttribute('aria-invalid'); }
     if (bad) { if (bad === name) name.focus(); return; }
@@ -194,48 +190,47 @@
       : { hi: 'Hola, La Bolera. Quiero hacer este pedido:', total: 'Total', name: 'Nombre', note: 'Nota' };
     let total = 0;
     const lines = ids.map(id => { const it = MENU[id], q = cart[id]; total += it.p * q; return `${q} x ${it[lang]} (${money(it.p * q)})`; });
-    const mode = form.elements.modo;
+    const mode = form.elements.modo, note = form.elements.nota.value.trim();
     const msg = [L.hi, ...lines, `${L.total}: ${money(total)}`, `${L.name}: ${name.value.trim()}`, mode.options[mode.selectedIndex].text]
-      .concat(form.elements.nota.value.trim() ? [`${L.note}: ${form.elements.nota.value.trim()}`] : []).join('\n');
+      .concat(note ? [`${L.note}: ${note}`] : []).join('\n');
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
 
-  /* ---------- parallax (solo fotos, dentro de su marco) ---------- */
+  /* ---------- movimiento: parallax por capas y giros ligados al scroll (solo gráficos y fotos, nunca texto) ---------- */
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const px = [...document.querySelectorAll('[data-parallax]')];
-  const sun = document.querySelector('[data-sun]');
-  const sunSection = sun && sun.closest('section');
-  const heroImg = document.querySelector('.hero__bg img, img.hero__bg');
+  const layers = [...document.querySelectorAll('[data-px]')];
+  const orbImg = document.querySelector('[data-orb-img]');
+  const frameImg = document.querySelector('.frame-offset__img img');
+  const spins = [...document.querySelectorAll('[data-spin]')];
+  const badge = document.querySelector('[data-badge]');
+  const badgeText = badge?.querySelector('.seal__text');
+  const closeLogo = document.querySelector('[data-float]');
+  const progress = (el) => { const r = el.getBoundingClientRect(), vh = innerHeight; return { r, p: (vh - r.top) / (vh + r.height) }; };   // 0 entra, 1 sale
   let ticking = false;
   function frame() {
     ticking = false;
     if (reduce.matches) return;
-    const vh = innerHeight;
-    for (const img of px) {
-      const box = img.parentElement.getBoundingClientRect();
-      if (box.bottom < -100 || box.top > vh + 100) continue;
-      const k = parseFloat(img.dataset.parallax) || 0.12;
-      const mid = box.top + box.height / 2 - vh / 2;   // 0 cuando el marco está centrado
-      const max = box.height * 0.06;
-      const y = Math.max(-max, Math.min(max, -mid * k));
-      img.style.setProperty('--px', y.toFixed(1) + 'px');
+    const y = scrollY, vh = innerHeight;
+    if (y < vh * 1.3) {
+      for (const el of layers) el.style.setProperty('--py', (y * parseFloat(el.dataset.px)).toFixed(1) + 'px');
+      if (orbImg) orbImg.style.setProperty('--op', (45 + Math.min(1, y / vh) * 25).toFixed(1) + '%');
     }
-    if (heroImg && scrollY < vh * 1.2) {
-      // el hero: la foto (más alta que su marco) se desliza por object-position, sin salir de su caja
-      const y = 42 + Math.min(1, scrollY / vh) * 30;
-      heroImg.style.objectPosition = `50% ${y.toFixed(1)}%`;
-    }
-    if (sun) {
-      const r = sunSection.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < vh) {
-        const t = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));   // 0 al entrar, 1 al salir
-        sun.style.setProperty('--t', t.toFixed(3));
-      }
-    }
+    if (frameImg) { const { r, p } = progress(frameImg.parentElement); if (r.bottom > 0 && r.top < vh) frameImg.style.setProperty('--py', ((p - .5) * -60).toFixed(1) + 'px'); }
+    for (const el of spins) { const { r, p } = progress(el); if (r.bottom > 0 && r.top < vh) el.style.setProperty('--rot', ((p - .5) * 120).toFixed(1) + 'deg'); }
+    if (badge) { const { r, p } = progress(badge); if (r.bottom > 0 && r.top < vh) { badgeText.style.setProperty('--rot', (p * 200).toFixed(1) + 'deg'); badge.style.setProperty('--py', ((p - .5) * -50).toFixed(1) + 'px'); } }
+    if (closeLogo) { const { r, p } = progress(closeLogo); if (r.bottom > 0 && r.top < vh) { closeLogo.style.setProperty('--py', ((p - .5) * -40).toFixed(1) + 'px'); closeLogo.style.setProperty('--rot', ((p - .5) * -10).toFixed(1) + 'deg'); } }
   }
   const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
   addEventListener('scroll', req, { passive: true });
   addEventListener('resize', req);
+
+  /* apariciones: cada bloque entra una vez, suave; sin script o con movimiento reducido todo se ve desde el inicio */
+  const reveal = [...document.querySelectorAll('[data-reveal]')];
+  if (reduce.matches || !('IntersectionObserver' in window)) reveal.forEach(el => el.classList.add('is-in'));
+  else {
+    const io = new IntersectionObserver((entries) => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    reveal.forEach(el => io.observe(el));
+  }
 
   snapshot();
   applyLang(true);
