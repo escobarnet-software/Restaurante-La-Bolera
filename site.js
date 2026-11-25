@@ -100,6 +100,8 @@
       el.closest('[data-moment]')?.classList.add('is-done');
     });
     document.querySelectorAll('.add-icon[data-add]').forEach(b => b.setAttribute('aria-label', (lang === 'en' ? 'Add ' : 'Agregar ') + MENU[b.dataset.add][lang]));
+    document.querySelectorAll('[data-sub]').forEach(b => b.setAttribute('aria-label', (lang === 'en' ? 'Remove one: ' : 'Quitar uno: ') + MENU[b.dataset.sub][lang]));
+    document.querySelectorAll('[data-plus]').forEach(b => b.setAttribute('aria-label', (lang === 'en' ? 'Add one: ' : 'Agregar uno: ') + MENU[b.dataset.add][lang]));
     document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     document.querySelector('.actionbar')?.setAttribute('aria-label', lang === 'en' ? 'Quick actions' : 'Acciones rápidas');
     render();
@@ -163,11 +165,16 @@
     empty.hidden = ids.length > 0;
     totalEl.textContent = money(total);
     document.querySelectorAll('[data-order-count]').forEach(c => { c.textContent = count; c.hidden = count === 0; });
-    document.querySelectorAll('[data-add]').forEach(b => {
-      const on = cart[b.dataset.add] > 0;
-      b.classList.toggle('is-added', on);
-      const label = b.querySelector('[data-i18n="add"]');
-      if (label) label.textContent = on ? t('added') + ' · ' + cart[b.dataset.add] : t('add');
+    // tarjetas: "Agregar" se vuelve un contador − n + ; filas de la carta: aparecen − y la cantidad
+    document.querySelectorAll('.add-btn[data-add]').forEach(b => {
+      const id = b.dataset.add, q = cart[id] || 0, st = document.querySelector(`[data-stepper="${id}"]`);
+      b.hidden = q > 0; if (st) { st.hidden = q === 0; st.querySelector('output').textContent = q; }
+    });
+    document.querySelectorAll('.add-icon[data-add]').forEach(b => {
+      const id = b.dataset.add, q = cart[id] || 0, row = b.closest('.row-ctl');
+      b.classList.toggle('is-added', q > 0);
+      row.querySelector('.sub-icon').hidden = q === 0;
+      const n = row.querySelector('.row-ctl__n'); n.hidden = q === 0; n.textContent = q;
     });
     if (ids.length && errEmpty) errEmpty.hidden = true;
   }
@@ -180,7 +187,9 @@
 
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-add]');
-    if (b) change(b.dataset.add, 1);
+    if (b) { change(b.dataset.add, 1); if (b.classList.contains('add-btn')) document.querySelector(`[data-stepper="${b.dataset.add}"] [data-plus]`)?.focus(); }
+    const m = e.target.closest('[data-sub]');
+    if (m) { const id = m.dataset.sub; change(id, -1); if (!cart[id]) document.querySelector(`.add-btn[data-add="${id}"], .add-icon[data-add="${id}"]`)?.focus(); }
     const lb = e.target.closest('[data-lang]');
     if (lb && lb.dataset.lang !== lang) { lang = lb.dataset.lang; store.set('lb-lang', lang); applyLang(false); }
   });
@@ -258,7 +267,8 @@
     if (reduce.matches) return;
     const y = scrollY, vh = innerHeight;
     if (y < vh * 1.3) {
-      for (const el of layers) el.style.setProperty('--py', (y * parseFloat(el.dataset.px)).toFixed(1) + 'px');
+      const k = innerWidth < 640 ? 0.3 : 1;   // en el teléfono los platos recorren mucho menos
+      for (const el of layers) el.style.setProperty('--py', (y * parseFloat(el.dataset.px) * k).toFixed(1) + 'px');
       if (orbImg) orbImg.style.setProperty('--op', (45 + Math.min(1, y / vh) * 25).toFixed(1) + '%');
     }
     if (frameImg) { const { r, p } = progress(frameImg.parentElement); if (r.bottom > 0 && r.top < vh) frameImg.style.setProperty('--py', ((p - .5) * -60).toFixed(1) + 'px'); }

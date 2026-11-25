@@ -121,7 +121,7 @@
   .orb--main { inset: 9%; }
   .orb--main .orb__img { box-shadow: 0 0 0 8px var(--p-bg), 0 0 0 9px rgba(220, 166, 75, .55), 0 40px 90px -30px rgba(0, 0, 0, .9); }
   .orb--main .orb__img img { transform: scale(1.12); object-position: 50% var(--op, 45%); }
-  .orb__ring { position: absolute; inset: -9%; width: 118%; height: 118%; overflow: visible; animation: spin 60s linear infinite; }
+  .orb__ring { position: absolute; left: -9%; top: -9%; width: 118% !important; height: auto !important; aspect-ratio: 1; overflow: visible; animation: spin 60s linear infinite; }
   .orb__ring-line { fill: none; stroke: var(--gold); stroke-width: 2.4; stroke-dasharray: 84 16; stroke-dashoffset: 0; stroke-linecap: round; }
   .orb__fork { fill: none; stroke: var(--gold); stroke-width: .8; stroke-linecap: round; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -163,6 +163,12 @@
     .lb-hero h1 { max-width: 16ch; }
   }
   @media (max-width: 639px) {
+    .hero.lb-hero { padding-bottom: 56px; }
+    .lb-hero__grid { gap: 28px; }
+    .lb-hero__art { width: min(86%, 300px); }
+    .orb--a { width: 32%; left: -6%; bottom: 8%; }
+    .orb--b { width: 26%; right: -6%; top: 4%; }
+    .lb-hero__facts { margin-top: 24px; }
     .lb-hero__logo { width: 112px; }
     .lb-hero h1 { font-size: 40px; }
     .lb-hero__lead { font-size: 17px; }
@@ -217,7 +223,13 @@
   .add-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(220, 166, 75, .6); background: transparent; color: var(--gold); font: 600 14px/1 var(--font-text); cursor: pointer; transition: background 200ms, color 200ms, transform 160ms; }
   .add-btn svg { width: 16px; height: 16px; }
   .add-btn:hover, .add-btn.is-added { background: var(--gold); color: #15100a; }
-  .add-btn:active, .add-icon:active { transform: scale(.94); }
+  .add-btn:active, .add-icon:active, .sub-icon:active, .stepper__btn:active { transform: scale(.94); }
+  .stepper { display: inline-flex; align-items: center; gap: 4px; padding: 3px; border-radius: 999px; background: var(--gold); color: #15100a; }
+  .stepper[hidden], .sub-icon[hidden], .row-ctl__n[hidden] { display: none; }
+  .stepper__btn { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(21, 16, 10, .12); color: #15100a; cursor: pointer; transition: background 200ms, transform 160ms; }
+  .stepper__btn:hover { background: rgba(21, 16, 10, .22); }
+  .stepper__btn svg { width: 16px; height: 16px; }
+  .stepper__n { min-width: 24px; text-align: center; font: 600 16px/1 var(--font-text); font-variant-numeric: tabular-nums; }
   @media (max-width: 1100px) { .dishes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 639px) { .dishes { gap: 14px; } .dish { padding: 18px 12px 14px; } .dish__name { font-size: 21px; } .dish__desc { font-size: 14px; }
     .dish__foot { flex-direction: column; gap: 10px; } .add-btn { width: 100%; justify-content: center; } }
@@ -228,7 +240,12 @@
   .carta-group__photo img { width: 100%; height: 100%; object-fit: cover; }
   .carta-group__label { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--gold); font: 400 18px/1.2 var(--font-caps); letter-spacing: .12em; }
   .carta-group__label .ic { font-size: 26px; --bg: var(--p-surface); }
-  .rows--menu > li { grid-template-columns: minmax(0, 1fr) auto 44px; align-items: center; min-height: 52px; padding-block: 0; border-bottom: 1px dashed rgba(220, 166, 75, .18); }
+  .row-ctl { display: inline-flex; align-items: center; gap: 2px; justify-self: end; }
+  .row-ctl__n { min-width: 22px; text-align: center; color: var(--cream); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .sub-icon { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(220, 166, 75, .45); border-radius: 50%; background: none; color: var(--gold); cursor: pointer; transition: background 200ms, color 200ms, transform 160ms; }
+  .sub-icon:hover { background: rgba(220, 166, 75, .15); }
+  .sub-icon svg { width: 18px; height: 18px; }
+  .rows--menu > li { grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; min-height: 52px; padding-block: 0; border-bottom: 1px dashed rgba(220, 166, 75, .18); }
   .rows--menu > li:first-child { padding-top: 0; }
   .rows--menu .rows__name { color: var(--cream); font-weight: 500; }
   .rows--menu .rows__value { color: var(--gold); font-variant-numeric: tabular-nums; }
@@ -296,7 +313,12 @@
   .frame-ticket > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .frame-ticket::after { content: ""; position: absolute; inset: 16px 36px; border: 1.5px dashed rgba(243, 234, 216, .7); border-radius: 16px; pointer-events: none; z-index: 2; }
   @media (max-width: 1023px) { .frame-ticket { min-height: 300px; margin-top: 24px; } }
-  @media (max-width: 639px) { .order { padding: 22px; } .order__fields { grid-template-columns: 1fr; } }
+  .order .field { min-width: 0; }
+  .order .field input { display: block; min-width: 0; max-width: 100%; }
+  .order .field input[type="date"], .order .field input[type="time"] { -webkit-appearance: none; appearance: none; text-align: left; line-height: 50px; }
+  .order .field input::-webkit-date-and-time-value { text-align: left; margin: 0; }
+  .order .field input::-webkit-datetime-edit { padding: 0; }
+  @media (max-width: 639px) { .order { padding: 20px; } .order__fields { grid-template-columns: minmax(0, 1fr); } .order__list > li { grid-template-columns: minmax(0, 1fr) auto; } .order__line-total { grid-column: 2; } .order__qty { grid-row: 2; } }
 
   /* ---------- cierre ---------- */
   .lb-close { position: relative; overflow: hidden; background: radial-gradient(50% 60% at 25% 45%, rgba(220, 166, 75, .18), transparent 70%), #070605; }
@@ -556,7 +578,8 @@
               <p class="dish__name" data-i18n="iCevCam">Ceviche de camarón</p>
               <p class="dish__desc" data-i18n="dCevCam">Curtido en limón, con tostones.</p>
               <div class="dish__foot"><span class="dish__price" data-assumed>$8.50</span>
-                <button class="add-btn" type="button" data-add="cev-cam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button></div>
+                <button class="add-btn" type="button" data-add="cev-cam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button>
+                <div class="stepper" data-stepper="cev-cam" hidden><button class="stepper__btn" type="button" data-sub="cev-cam" aria-label="Quitar uno: Ceviche de camarón"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="stepper__n" aria-live="polite">0</output><button class="stepper__btn" type="button" data-add="cev-cam" data-plus aria-label="Agregar uno: Ceviche de camarón"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
             </div>
           </article>
           <article class="dish" data-reveal style="--i: 1">
@@ -565,7 +588,8 @@
               <p class="dish__name" data-i18n="iCocCam">Cóctel de camarón</p>
               <p class="dish__desc" data-i18n="dCocCam">Con aguacate y tostadas.</p>
               <div class="dish__foot"><span class="dish__price" data-assumed>$7.75</span>
-                <button class="add-btn" type="button" data-add="coc-cam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button></div>
+                <button class="add-btn" type="button" data-add="coc-cam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button>
+                <div class="stepper" data-stepper="coc-cam" hidden><button class="stepper__btn" type="button" data-sub="coc-cam" aria-label="Quitar uno: Cóctel de camarón"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="stepper__n" aria-live="polite">0</output><button class="stepper__btn" type="button" data-add="coc-cam" data-plus aria-label="Agregar uno: Cóctel de camarón"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
             </div>
           </article>
           <article class="dish" data-reveal style="--i: 2">
@@ -574,7 +598,8 @@
               <p class="dish__name" data-i18n="iCalam">Calamares fritos</p>
               <p class="dish__desc" data-i18n="dCalam">Con limón y salsa picante.</p>
               <div class="dish__foot"><span class="dish__price" data-assumed>$8.25</span>
-                <button class="add-btn" type="button" data-add="calam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button></div>
+                <button class="add-btn" type="button" data-add="calam"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button>
+                <div class="stepper" data-stepper="calam" hidden><button class="stepper__btn" type="button" data-sub="calam" aria-label="Quitar uno: Calamares fritos"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="stepper__n" aria-live="polite">0</output><button class="stepper__btn" type="button" data-add="calam" data-plus aria-label="Agregar uno: Calamares fritos"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
             </div>
           </article>
           <article class="dish" data-reveal style="--i: 3">
@@ -583,7 +608,8 @@
               <p class="dish__name" data-i18n="iMoj">Mojarra frita</p>
               <p class="dish__desc" data-i18n="dMoj">Con arroz, ensalada y papas.</p>
               <div class="dish__foot"><span class="dish__price" data-assumed>$9.50</span>
-                <button class="add-btn" type="button" data-add="moj"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button></div>
+                <button class="add-btn" type="button" data-add="moj"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="add">Agregar</span></button>
+                <div class="stepper" data-stepper="moj" hidden><button class="stepper__btn" type="button" data-sub="moj" aria-label="Quitar uno: Mojarra frita"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="stepper__n" aria-live="polite">0</output><button class="stepper__btn" type="button" data-add="moj" data-plus aria-label="Agregar uno: Mojarra frita"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
             </div>
           </article>
       </div>
@@ -603,11 +629,11 @@
             <p class="carta-group__label"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shrimp"/></svg><span data-i18n="gCev">Ceviches y cócteles</span></p>
           </div>
           <ul class="rows rows--menu">
-              <li><span class="rows__name" data-i18n="iCevPes">Ceviche de pescado</span><span class="rows__value" data-assumed>$7.25</span><button class="add-icon" type="button" data-add="cev-pes" aria-label="Agregar Ceviche de pescado"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iCevMix">Ceviche mixto</span><span class="rows__value" data-assumed>$9.75</span><button class="add-icon" type="button" data-add="cev-mix" aria-label="Agregar Ceviche mixto"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iCevCon">Ceviche de concha negra</span><span class="rows__value" data-assumed>$10.50</span><button class="add-icon" type="button" data-add="cev-con" aria-label="Agregar Ceviche de concha negra"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iCocCon">Cóctel de conchas</span><span class="rows__value" data-assumed>$9.25</span><button class="add-icon" type="button" data-add="coc-con" aria-label="Agregar Cóctel de conchas"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iCamp">Campechana</span><span class="rows__value" data-assumed>$10.75</span><button class="add-icon" type="button" data-add="camp" aria-label="Agregar Campechana"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
+              <li><span class="rows__name" data-i18n="iCevPes">Ceviche de pescado</span><span class="rows__value" data-assumed>$7.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="cev-pes" aria-label="Quitar uno: Ceviche de pescado" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="cev-pes" hidden>0</output><button class="add-icon" type="button" data-add="cev-pes" aria-label="Agregar Ceviche de pescado"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iCevMix">Ceviche mixto</span><span class="rows__value" data-assumed>$9.75</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="cev-mix" aria-label="Quitar uno: Ceviche mixto" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="cev-mix" hidden>0</output><button class="add-icon" type="button" data-add="cev-mix" aria-label="Agregar Ceviche mixto"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iCevCon">Ceviche de concha negra</span><span class="rows__value" data-assumed>$10.50</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="cev-con" aria-label="Quitar uno: Ceviche de concha negra" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="cev-con" hidden>0</output><button class="add-icon" type="button" data-add="cev-con" aria-label="Agregar Ceviche de concha negra"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iCocCon">Cóctel de conchas</span><span class="rows__value" data-assumed>$9.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="coc-con" aria-label="Quitar uno: Cóctel de conchas" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="coc-con" hidden>0</output><button class="add-icon" type="button" data-add="coc-con" aria-label="Agregar Cóctel de conchas"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iCamp">Campechana</span><span class="rows__value" data-assumed>$10.75</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="camp" aria-label="Quitar uno: Campechana" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="camp" hidden>0</output><button class="add-icon" type="button" data-add="camp" aria-label="Agregar Campechana"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
           </ul>
         </div>
         <div class="carta-group span-4" data-reveal>
@@ -616,11 +642,11 @@
             <p class="carta-group__label"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fish"/></svg><span data-i18n="gMain">Platos fuertes</span></p>
           </div>
           <ul class="rows rows--menu">
-              <li><span class="rows__name" data-i18n="iPargo">Pargo entero frito</span><span class="rows__value" data-assumed>$13.75</span><button class="add-icon" type="button" data-add="pargo" aria-label="Agregar Pargo entero frito"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iAjillo">Camarones al ajillo</span><span class="rows__value" data-assumed>$10.25</span><button class="add-icon" type="button" data-add="ajillo" aria-label="Agregar Camarones al ajillo"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iEmp">Camarones empanizados</span><span class="rows__value" data-assumed>$9.75</span><button class="add-icon" type="button" data-add="emp" aria-label="Agregar Camarones empanizados"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iSopa">Sopa de mariscos</span><span class="rows__value" data-assumed>$11.25</span><button class="add-icon" type="button" data-add="sopa" aria-label="Agregar Sopa de mariscos"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iMarisc">Mariscada en crema</span><span class="rows__value" data-assumed>$15.50</span><button class="add-icon" type="button" data-add="marisc" aria-label="Agregar Mariscada en crema"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
+              <li><span class="rows__name" data-i18n="iPargo">Pargo entero frito</span><span class="rows__value" data-assumed>$13.75</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="pargo" aria-label="Quitar uno: Pargo entero frito" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="pargo" hidden>0</output><button class="add-icon" type="button" data-add="pargo" aria-label="Agregar Pargo entero frito"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iAjillo">Camarones al ajillo</span><span class="rows__value" data-assumed>$10.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="ajillo" aria-label="Quitar uno: Camarones al ajillo" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="ajillo" hidden>0</output><button class="add-icon" type="button" data-add="ajillo" aria-label="Agregar Camarones al ajillo"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iEmp">Camarones empanizados</span><span class="rows__value" data-assumed>$9.75</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="emp" aria-label="Quitar uno: Camarones empanizados" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="emp" hidden>0</output><button class="add-icon" type="button" data-add="emp" aria-label="Agregar Camarones empanizados"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iSopa">Sopa de mariscos</span><span class="rows__value" data-assumed>$11.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="sopa" aria-label="Quitar uno: Sopa de mariscos" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="sopa" hidden>0</output><button class="add-icon" type="button" data-add="sopa" aria-label="Agregar Sopa de mariscos"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iMarisc">Mariscada en crema</span><span class="rows__value" data-assumed>$15.50</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="marisc" aria-label="Quitar uno: Mariscada en crema" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="marisc" hidden>0</output><button class="add-icon" type="button" data-add="marisc" aria-label="Agregar Mariscada en crema"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
           </ul>
         </div>
         <div class="carta-group span-4" data-reveal>
@@ -629,11 +655,11 @@
             <p class="carta-group__label"><svg class="ic" viewBox="0 0 24 30" aria-hidden="true"><use href="#i-mug"/></svg><span data-i18n="gDrinks">Bebidas</span></p>
           </div>
           <ul class="rows rows--menu">
-              <li><span class="rows__name" data-i18n="iMich">Michelada</span><span class="rows__value" data-assumed>$3.50</span><button class="add-icon" type="button" data-add="mich" aria-label="Agregar Michelada"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iBeer">Cerveza nacional</span><span class="rows__value" data-assumed>$2.25</span><button class="add-icon" type="button" data-add="beer" aria-label="Agregar Cerveza nacional"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iLim">Limonada</span><span class="rows__value" data-assumed>$1.85</span><button class="add-icon" type="button" data-add="lim" aria-label="Agregar Limonada"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iCoco">Coco helado</span><span class="rows__value" data-assumed>$2.00</span><button class="add-icon" type="button" data-add="coco" aria-label="Agregar Coco helado"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
-              <li><span class="rows__name" data-i18n="iSoda">Refresco</span><span class="rows__value" data-assumed>$1.25</span><button class="add-icon" type="button" data-add="soda" aria-label="Agregar Refresco"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></li>
+              <li><span class="rows__name" data-i18n="iMich">Michelada</span><span class="rows__value" data-assumed>$3.50</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="mich" aria-label="Quitar uno: Michelada" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="mich" hidden>0</output><button class="add-icon" type="button" data-add="mich" aria-label="Agregar Michelada"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iBeer">Cerveza nacional</span><span class="rows__value" data-assumed>$2.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="beer" aria-label="Quitar uno: Cerveza nacional" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="beer" hidden>0</output><button class="add-icon" type="button" data-add="beer" aria-label="Agregar Cerveza nacional"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iLim">Limonada</span><span class="rows__value" data-assumed>$1.85</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="lim" aria-label="Quitar uno: Limonada" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="lim" hidden>0</output><button class="add-icon" type="button" data-add="lim" aria-label="Agregar Limonada"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iCoco">Coco helado</span><span class="rows__value" data-assumed>$2.00</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="coco" aria-label="Quitar uno: Coco helado" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="coco" hidden>0</output><button class="add-icon" type="button" data-add="coco" aria-label="Agregar Coco helado"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
+              <li><span class="rows__name" data-i18n="iSoda">Refresco</span><span class="rows__value" data-assumed>$1.25</span><span class="row-ctl"><button class="sub-icon" type="button" data-sub="soda" aria-label="Quitar uno: Refresco" hidden><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><output class="row-ctl__n" data-row-n="soda" hidden>0</output><button class="add-icon" type="button" data-add="soda" aria-label="Agregar Refresco"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></li>
           </ul>
         </div>
       </div>

@@ -10,6 +10,7 @@ def img(id_, alt, key, subj, size='960', sizes='(max-width: 639px) 100vw, 560px'
             f'alt="{alt}" data-i18n-attr="alt:{key}"{" loading=" + chr(34) + "lazy" + chr(34) if lazy else ""} '
             f'data-source="stand-in" data-subject="{subj}">')
 
+MINUS = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
 PLUS = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
 WA_ICON = '<svg class="ic-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>'
 ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>'
@@ -50,7 +51,8 @@ def dish_cards():
               <p class="dish__name" data-i18n="{k}">{name}</p>
               <p class="dish__desc" data-i18n="{dk}">{desc}</p>
               <div class="dish__foot"><span class="dish__price" data-assumed>{price}</span>
-                <button class="add-btn" type="button" data-add="{id_}">{PLUS}<span data-i18n="add">Agregar</span></button></div>
+                <button class="add-btn" type="button" data-add="{id_}">{PLUS}<span data-i18n="add">Agregar</span></button>
+                <div class="stepper" data-stepper="{id_}" hidden><button class="stepper__btn" type="button" data-sub="{id_}" aria-label="Quitar uno: {name}">{MINUS}</button><output class="stepper__n" aria-live="polite">0</output><button class="stepper__btn" type="button" data-add="{id_}" data-plus aria-label="Agregar uno: {name}">{PLUS}</button></div></div>
             </div>
           </article>''')
     return '\n'.join(out)
@@ -61,7 +63,8 @@ def groups():
         ph, alt, ak, subj = GROUP_PHOTOS[gk]
         lis = '\n'.join(
             f'              <li><span class="rows__name" data-i18n="{k}">{n}</span><span class="rows__value" data-assumed>{p}</span>'
-            f'<button class="add-icon" type="button" data-add="{id_}" aria-label="Agregar {n}">{PLUS}</button></li>'
+            f'<span class="row-ctl"><button class="sub-icon" type="button" data-sub="{id_}" aria-label="Quitar uno: {n}" hidden>{MINUS}</button><output class="row-ctl__n" data-row-n="{id_}" hidden>0</output>'
+            f'<button class="add-icon" type="button" data-add="{id_}" aria-label="Agregar {n}">{PLUS}</button></span></li>'
             for id_, k, n, p in rows)
         out.append(f'''        <div class="carta-group span-4" data-reveal>
           <div class="carta-group__head">
