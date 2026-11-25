@@ -63,6 +63,11 @@
     closeH: 'See you on the Malecón', closeLead: 'Tables by the sea, seafood made to order and ice-cold beer. Open 3 p.m. to 2 a.m.; closed Tuesdays.',
     ciPlaceK: 'Where', ciPlaceV: 'Malecón, Puerto de La Libertad', ciHoursK: 'Hours', ciHoursV: 'Mon and Wed to Sun, 3 p.m. to 2 a.m.', ciGoK: 'Bookings and orders', ciGoV: 'On WhatsApp, at the time you choose',
     credits: 'Photographs via Wikimedia Commons',
+    navRoute: 'Directions', howGet: 'Getting here',
+    routeOrn: 'Getting here', routeH: 'Come straight to the Malecón', routeLead: 'We are on the Malecón at Puerto de La Libertad, steps from the pier. Pick your app and it takes you to the door.',
+    appWaze: 'Start the route', appGoogle: 'See it on the map', appApple: 'For iPhone', appUber: 'Get a ride here',
+    routeTip: 'Each app plans the route from wherever you are.', nearBtn: 'See how far I am',
+    mapFrom: 'FROM WHERE YOU ARE', mapPier: 'PIER', mapMalecon: 'MALECÓN', mapSea: 'PACIFIC OCEAN',
     qtyLess: 'One less', qtyMore: 'One more', today: 'Today',
   };
 
@@ -99,6 +104,7 @@
     document.querySelector('.actionbar')?.setAttribute('aria-label', lang === 'en' ? 'Quick actions' : 'Acciones rápidas');
     render();
     hoursToday();
+    if (typeof nearText === 'function') try { nearText(); } catch {}
   }
 
   /* ---------- horario: hoy y abierto / cerrado (lunes y de miércoles a domingo, 15:00 a 2:00) ---------- */
@@ -272,6 +278,32 @@
     const io = new IntersectionObserver((entries) => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     reveal.forEach(el => io.observe(el));
   }
+
+  /* distancia desde el visitante: solo al tocar el botón; la ubicación no se guarda ni se envía */
+  const DEST = { lat: 13.4836833, lon: -89.3243403 };
+  const nearBtn = document.querySelector('[data-near]');
+  let nearKm = null;
+  const nearText = () => {
+    if (nearKm == null) return;
+    const km = nearKm < 10 ? nearKm.toFixed(1) : Math.round(nearKm);
+    const mins = Math.max(2, Math.round(nearKm * 1.3 + 3));   // aproximado en carro
+    nearBtn.querySelector('[data-near-text]').textContent = lang === 'en'
+      ? `You are about ${km} km away (≈ ${mins} min by car)` : `Está a unos ${km} km (≈ ${mins} min en carro)`;
+  };
+  nearBtn?.addEventListener('click', () => {
+    if (nearKm != null || !navigator.geolocation) return;
+    nearBtn.classList.add('is-busy');
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const R = 6371, rad = (d) => d * Math.PI / 180;
+      const dLat = rad(DEST.lat - pos.coords.latitude), dLon = rad(DEST.lon - pos.coords.longitude);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(pos.coords.latitude)) * Math.cos(rad(DEST.lat)) * Math.sin(dLon / 2) ** 2;
+      nearKm = 2 * R * Math.asin(Math.sqrt(a)) * 1.3;   // en línea recta x 1.3 para aproximar la carretera
+      nearBtn.classList.remove('is-busy'); nearBtn.classList.add('is-done'); nearText();
+    }, () => {
+      nearBtn.classList.remove('is-busy');
+      nearBtn.querySelector('[data-near-text]').textContent = lang === 'en' ? 'Location not available; the apps will still find the route' : 'No se pudo ver su ubicación; las apps igual trazan la ruta';
+    }, { timeout: 10000, maximumAge: 300000 });
+  });
 
   snapshot();
   applyLang(true);

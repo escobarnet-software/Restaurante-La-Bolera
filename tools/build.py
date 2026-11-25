@@ -213,7 +213,10 @@ html = f'''<!doctype html>
           <a class="app" href="https://maps.apple.com/?q=Restaurante%20La%20Bolera&ll=13.4836833,-89.3243403" target="_blank" rel="noopener" data-reveal style="--i: 2"><span class="app__tile"><img src="assets/icons/apple.svg" alt="" width="25" height="30"></span><span class="app__txt"><strong>Apple Maps</strong><span data-i18n="appApple">Para iPhone</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="app" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=13.4836833&dropoff%5Blongitude%5D=-89.3243403&dropoff%5Bnickname%5D=Restaurante%20La%20Bolera" target="_blank" rel="noopener" data-reveal style="--i: 3"><span class="app__tile app__tile--uber"><img src="assets/icons/uber.svg" alt="" width="40" height="14"></span><span class="app__txt"><strong>Uber</strong><span data-i18n="appUber">Pedir un viaje hasta aquí</span></span><svg class="app__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <p class="lb-route__tip" data-reveal><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg><span data-i18n="routeTip">Desde San Salvador son unos 35 km por la carretera al Puerto de La Libertad.</span></p>
+        <div class="lb-route__tip" data-reveal>
+          <p><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="routeTip">Cada app traza la ruta desde donde usted esté.</span></p>
+          <button class="near" type="button" data-near><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-target"/></svg><span data-near-text data-i18n="nearBtn">Ver a qué distancia estoy</span></button>
+        </div>
       </div>
       <div class="span-6 start-7">
         <div class="map-art" data-route aria-hidden="true">
@@ -232,8 +235,8 @@ html = f'''<!doctype html>
               <path d="M-20 360C80 330 180 400 290 372S470 330 580 352" fill="none" stroke="#dca64b" stroke-width="3"/>
               <rect class="map-art__pier" x="330" y="352" width="16" height="120" rx="3" fill="#2a2016" stroke="#dca64b" stroke-width="1.5"/>
               <path class="map-art__route" d="M40 40C120 90 150 150 190 210S260 300 300 330" fill="none" stroke="#dca64b" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 12" pathLength="100"/>
-              <circle cx="40" cy="40" r="7" fill="#f3ead8"/>
-              <text x="58" y="45" class="map-art__label" data-i18n="mapFrom">DESDE SAN SALVADOR</text>
+              <circle cx="40" cy="40" r="11" fill="none" stroke="#f3ead8" stroke-width="2" opacity=".5"/><circle cx="40" cy="40" r="6" fill="#f3ead8"/>
+              <text x="58" y="45" class="map-art__label" data-i18n="mapFrom">DESDE DONDE ESTÉ</text>
               <text x="362" y="420" class="map-art__label" data-i18n="mapPier">MUELLE</text>
               <text x="190" y="352" class="map-art__label" data-i18n="mapMalecon">MALECÓN</text>
               <text x="200" y="530" class="map-art__label map-art__label--sea" data-i18n="mapSea">OCÉANO PACÍFICO</text>
